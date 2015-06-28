@@ -772,31 +772,6 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/BuildInformation'
-    put:
-      tags:
-      - trainer
-      - build
-      parameters:
-      - in: path
-        name: trainerKey
-        type: string
-      responses:
-        200:
-          description: OK
-          schema:
-            $ref: '#/definitions/BuildInformation'
-    delete:
-      tags:
-      - trainer
-      - build
-      - delete
-      parameters:
-      - in: path
-        name: trainerKey
-        type: string
-      responses:
-        200:
-          description: OK
 
   /trainers/{trainerKey}/evaluations:
     get:
