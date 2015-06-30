@@ -105,97 +105,11 @@ paths:
       summary: Remove the whole DM Service
       description: Remove the medata, archive, processers, input and outpu, not including related model.
       parameters:
-        - in: path
-          name: svcKey
-          type: string
-
+      - in: path
+        name: svcKey
+        type: string
       responses:
         200:
-          description: OK
-
-  /svcs/{svcKey}/processes:
-    get:
-      tags:
-      - svcs
-      summary: Get process history of the DM Service
-      parameters:
-      - in: path
-        name: svcKey
-        description: "The generated key of a DMService"
-        type: string
-      - name: limit
-        in: query
-        description: maximum number of results to return
-        required: false
-        type: integer
-        format: int32
-      - name: start
-        in: query
-        description: start index of response entities list
-        required: false
-        type: integer
-        format: int32
-      - name: orderby
-        in: query
-        description: the order factor of the list.
-        required: false
-        type: string
-      responses:
-        "200":
-          description: OK
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/ProcessMetadata'
-    post:
-      tags:
-      - svcs
-      - processes
-      parameters:
-      - in: path
-        name: svcKey
-        type: string
-      - in: body
-        name: body
-        schema:
-          $ref: "#/definitions/DMData"
-      responses:
-        200:
-          description: OK
-          schema:
-            $ref: '#/definitions/Process'
-
-  /svcs/{svcKey}/processes/{processKey}:
-    get:
-      tags:
-      - svcs
-      summary: Get process history of the DM Service
-      parameters:
-      - in: path
-        name: svcKey
-        description: "The generated key of a DMService"
-        type: string
-      - name: processKey
-        in: path
-        type: string
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/Process'
-    delete:
-      tags:
-      - svcs
-      summary: Delete process history of the DM Service
-      parameters:
-      - in: path
-        name: svcKey
-        type: string
-      - name: processKey
-        in: path
-        type: string
-      responses:
-        "200":
           description: OK
 
   /svcs/{svcKey}/processers:
@@ -216,7 +130,6 @@ paths:
     put:
       tags:
       - svcs
-      -
       description: If this Service has been build already, use that deployed ProcessFlow to handle the data. Otherwise an ad_hoc execute will be run.
       parameters:
       - in: path
@@ -313,32 +226,7 @@ paths:
         "200":
             description: OK
             schema:
-              $ref: '#/definitions/BuildInformation'
-    put:
-      tags:
-      - svc
-      - build
-      parameters:
-      - in: path
-        name: svcKey
-        type: string
-      responses:
-        200:
-          description: OK
-          schema:
-            $ref: '#/definitions/BuildInformation'
-    delete:
-      tags:
-      - svc
-      - build
-      - delete
-      parameters:
-      - in: path
-        name: svcKey
-        type: string
-      responses:
-        200:
-          description: OK
+              $ref: '#/definitions/ServiceFlow'
 
   #Model
   /models:
@@ -468,7 +356,6 @@ paths:
         name: body
         schema:
           $ref: '#/definitions/ModelMetadata'
-
       responses:
         200:
           description: OK
@@ -578,51 +465,51 @@ paths:
         - application/json
         - application/xml
       parameters:
-        - name: tags
-          in: query
-          description: tags to filter by
-          required: false
-          type: array
-          items:
-            type: string
-          collectionFormat: csv
-        - name: name
-          in: query
-          description: "DMService's type to filter by"
-          required: false
+      - name: tags
+        in: query
+        description: tags to filter by
+        required: false
+        type: array
+        items:
           type: string
-        - name: type
-          in: query
-          description: "DMService's type to filter by"
-          required: false
-          type: string
-        - name: domain
-          in: query
-          description: "DMService's domain to filter by"
-          required: false
-          type: string
-        - name: locale
-          in: query
-          description: "DMService's locale to filter by"
-          required: false
-          type: string
-        - name: limit
-          in: query
-          description: maximum number of results to return
-          required: false
-          type: integer
-          format: int32
-        - name: start
-          in: query
-          description: start index of response entities list
-          required: false
-          type: integer
-          format: int32
-        - name: orderby
-          in: query
-          description: the order factor of the list.
-          required: false
-          type: string
+        collectionFormat: csv
+      - name: name
+        in: query
+        description: "DMService's type to filter by"
+        required: false
+        type: string
+      - name: type
+        in: query
+        description: "DMService's type to filter by"
+        required: false
+        type: string
+      - name: domain
+        in: query
+        description: "DMService's domain to filter by"
+        required: false
+        type: string
+      - name: locale
+        in: query
+        description: "DMService's locale to filter by"
+        required: false
+        type: string
+      - name: limit
+        in: query
+        description: maximum number of results to return
+        required: false
+        type: integer
+        format: int32
+      - name: start
+        in: query
+        description: start index of response entities list
+        required: false
+        type: integer
+        format: int32
+      - name: orderby
+        in: query
+        description: the order factor of the list.
+        required: false
+        type: string
       responses:
         200:
           description: OK
@@ -654,7 +541,6 @@ paths:
       - in: path
         name: trainerKey
         type: string
-
       responses:
         200:
           description: OK
@@ -681,9 +567,9 @@ paths:
       tags:
       - trainer
       parameters:
-        - in: path
-          name: trainerKey
-          type: string
+      - in: path
+        name: trainerKey
+        type: string
       responses:
         200:
           description: OK
@@ -732,9 +618,9 @@ paths:
       - trainer
       - input
       parameters:
-        - in: path
-          name: trainerKey
-          type: string
+      - in: path
+        name: trainerKey
+        type: string
       responses:
         "200":
           description: OK
@@ -764,21 +650,6 @@ paths:
       - trainer
       - build
       parameters:
-        - in: path
-          name: trainerKey
-          type: string
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/BuildInformation'
-
-  /trainers/{trainerKey}/evaluations:
-    get:
-      tags:
-      - trainer
-      - evaluation
-      parameters:
       - in: path
         name: trainerKey
         type: string
@@ -786,58 +657,7 @@ paths:
         "200":
           description: OK
           schema:
-            type: array
-            items:
-              $ref: '#/definitions/TrainerEvaluation'
-    post:
-      tags:
-      - svcs
-      - input
-      parameters:
-      - in: path
-        name: trainerKey
-        type: string
-      - in: body
-        name: body
-        schema:
-         $ref: "#/definitions/EvaluationData"
-      responses:
-        200:
-          description: OK
-          schema:
-              $ref: '#/definitions/TrainerEvaluation'
-
-  /trainers/{trainerKey}/evaluations/{evaKey}:
-    get:
-      tags:
-      - trainer
-      - evaluation
-      parameters:
-      - in: path
-        name: trainerKey
-        type: string
-      - in: path
-        name: evaKey
-        type: string
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/TrainerEvaluation'
-    delete:
-      tags:
-      - trainer
-      - evaluation
-      parameters:
-        - in: path
-          name: trainerKey
-          type: string
-        - in: path
-          name: evaKey
-          type: string
-      responses:
-        "200":
-          description: OK
+            $ref: '#/definitions/TrainerFlow'
 
   #Archives services.
   /archives/svcs:
@@ -1049,33 +869,21 @@ definitions:
       owner:
         type: string
 
-  ProcessMetadata:
+  ProcesserAlgorithm:
     properties:
       key:
         type: string
-      status:
+      name:
         type: string
-
-  Process:
-    properties:
-      key:
+      description:
         type: string
-      inputData:
-        $ref: '#/definitions/DMData'
-      outputData:
-        $ref: '#/definitions/DMData'
-      errors:
+      tags:
         type: array
         items:
           type: string
-      warnings:
-        type: array
-        items:
-          type: string
-      logs:
-        type: array
-        items:
-          type: string
+      catalog:
+        description: The catelog path of the trainer, classifier.decisionTree.id3
+        type: string
 
   Processer:
     properties:
@@ -1123,6 +931,11 @@ definitions:
       metadata:
         $ref: '#/definitions/ServiceArchiveMetadata'
       content:
+        type: string
+
+  ServiceFlow:
+    properties:
+      key:
         type: string
 
   ModelMetadata:
@@ -1258,27 +1071,7 @@ definitions:
       content:
         type: string
 
-  EvaluationData:
-    properties:
-      data:
-        $ref: '#/definitions/DMData'
-      resultAttr:
-        $ref: '#/definitions/Attribute'
-
-  TrainerEvaluation:
-    properties:
-      status:
-        type: string
-      evaData:
-        $ref: '#/definitions/EvaluationData'
-      datetime:
-        type: string
-      executionPeriod:
-        type: string
-      result:
-        $ref: '#/definitions/DMData'
-
-  BuildInformation:
+  TrainerFlow:
     properties:
       key:
         type: string
