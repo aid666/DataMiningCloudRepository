@@ -19,37 +19,76 @@ produces:
   - application/json
   - application/xml
 paths:
-  #Service
+
   /svcs:
     get:
       tags:
       - svcs
-      description: Search DMService Metadata based on the filter. Default limit is 50 and the default start index is 0
-      operationId: searchDMSvc
+      parameters:
+      - name: tags
+        in: query
+        description: tags to filter by
+        required: false
+        type: array
+        items:
+          type: string
+        collectionFormat: csv
+      - name: name
+        in: query
+        description: "DMService's type to filter by"
+        required: false
+        type: string
+      - name: type
+        in: query
+        description: "DMService's type to filter by"
+        required: false
+        type: string
+      - name: domain
+        in: query
+        description: "DMService's domain to filter by"
+        required: false
+        type: string
+      - name: locale
+        in: query
+        description: "DMService's locale to filter by"
+        required: false
+        type: string
+      - name: limit
+        in: query
+        description: maximum number of results to return
+        required: false
+        type: integer
+        format: int32
+      - name: start
+        in: query
+        description: start index of response entities list
+        required: false
+        type: integer
+        format: int32
+      - name: orderby
+        in: query
+        description: the order factor of the list.
+        required: false
+        type: string
       responses:
-        '200':
+        200:
           description: DMService Metadata List
           schema:
             type: array
             items:
               $ref: '#/definitions/DMSvcMetadata'
-        default:
-          description: unexpected error
-          schema:
-            $ref: '#/definitions/errorModel'
     post:
+      tags:
+      - svcs
       description: "Create a new DM Service"
-      operationId: addSvc
       parameters:
-        - in: body
-          name: body
-          description: ""
-          schema:
-            $ref: "#/definitions/DMSvcMetadata"
+      - in: body
+        name: body
+        schema:
+          $ref: "#/definitions/DMSvcMetadata"
       responses:
         200:
           description: OK
-          description: Created DM Service
           schema:
               $ref: '#/definitions/DMSvcMetadata'
         default:
@@ -78,12 +117,6 @@ paths:
       - svcs
       summary: Update metadata of DM Service
       description: Update the medata of DM Service based on the svcKey
-      consumes:
-        - application/json
-        - application/xml
-      produces:
-        - application/json
-        - application/xml
       parameters:
       - in: path
         name: svcKey
@@ -166,7 +199,6 @@ paths:
     put:
       tags:
       - svcs
-      - input
       parameters:
       - in: path
         name: svcKey
@@ -185,7 +217,6 @@ paths:
     get:
       tags:
       - svcs
-      - output
       parameters:
       - in: path
         name: svcKey
@@ -198,7 +229,6 @@ paths:
     put:
       tags:
       - svcs
-      - output
       parameters:
       - in: path
         name: svcKey
@@ -216,8 +246,7 @@ paths:
   /svcs/{svcKey}/build:
     get:
       tags:
-      - svc
-      - build
+      - svcs
       parameters:
       - in: path
         name: svcKey
@@ -228,73 +257,69 @@ paths:
             schema:
               $ref: '#/definitions/ServiceFlow'
 
-  #Model
   /models:
     get:
-      description: Search Model Metadata based on the filter. Default limit is 50 and the default start index is 0
-      operationId: searchModel
-      produces:
-        - application/json
-        - application/xml
+      tags:
+      - model
       parameters:
-        - name: tags
-          in: query
-          description: tags to filter by
-          required: false
-          type: array
-          items:
-            type: string
-          collectionFormat: csv
-        - name: name
-          in: query
-          description: "Model's name to filter by"
-          required: false
+      - name: tags
+        in: query
+        description: tags to filter by
+        required: false
+        type: array
+        items:
           type: string
-        - name: type
-          in: query
-          description: "Model's type to filter by"
-          required: false
-          type: string
-        - name: domain
-          in: query
-          description: "Model's domain to filter by"
-          required: false
-          type: string
-        - name: locale
-          in: query
-          description: "Model's locale to filter by"
-          required: false
-          type: string
-        - name: trainerType
-          in: query
-          description: "Model's trainer type to filter by"
-          required: false
-          type: string
-        - name: referenceCountLowLimit
-          in: query
-          description: The minium reference count to filter by
-          type: integer
-          format: int32
-        - name: limit
-          in: query
-          description: maximum number of results to return
-          required: false
-          type: integer
-          format: int32
-        - name: start
-          in: query
-          description: start index of response entities list
-          required: false
-          type: integer
-          format: int32
-        - name: orderby
-          in: query
-          description: the order factor of the list.
-          required: false
-          type: string
+        collectionFormat: csv
+      - name: name
+        in: query
+        description: "Model's name to filter by"
+        required: false
+        type: string
+      - name: type
+        in: query
+        description: "Model's type to filter by"
+        required: false
+        type: string
+      - name: domain
+        in: query
+        description: "Model's domain to filter by"
+        required: false
+        type: string
+      - name: locale
+        in: query
+        description: "Model's locale to filter by"
+        required: false
+        type: string
+      - name: trainerType
+        in: query
+        description: "Model's trainer type to filter by"
+        required: false
+        type: string
+      - name: referenceCountLowLimit
+        in: query
+        description: The minium reference count to filter by
+        type: integer
+        format: int32
+      - name: limit
+        in: query
+        description: maximum number of results to return
+        required: false
+        type: integer
+        format: int32
+      - name: start
+        in: query
+        description: start index of response entities list
+        required: false
+        type: integer
+        format: int32
+      - name: orderby
+        in: query
+        description: the order factor of the list.
+        required: false
+        type: string
       responses:
-        '200':
-          description: Model List
+        200:
+          description: OK
           schema:
             type: array
             items:
@@ -304,21 +329,16 @@ paths:
           schema:
             $ref: '#/definitions/errorModel'
     post:
+      tags:
+      - model
       description: "Create a new DM Processer Model"
-      operationId: addSvc
-      consumes:
-        - application/json
-        - application/xml
-      produces:
-        - application/json
-        - application/xml
       parameters:
-        - in: body
-          name: body
-          schema:
-            $ref: "#/definitions/ModelBuildRequest"
+      - in: body
+        name: body
+        schema:
+          $ref: "#/definitions/ModelBuildRequest"
       responses:
-        200:
+        201:
           description: OK
           schema:
              $ref: '#/definitions/ModelMetadata'
@@ -338,7 +358,6 @@ paths:
         name: modelKey
         description: "The generated key of a Processer model"
         type: string
-
       responses:
         200:
           description: OK
@@ -357,21 +376,25 @@ paths:
         schema:
           $ref: '#/definitions/ModelMetadata'
       responses:
-        200:
+        201:
           description: OK
           schema:
               $ref: '#/definitions/ModelMetadata'
     delete:
+      tags:
+      - model
       parameters:
-        - in: path
-          name: modelKey
-          type: string
+      - in: path
+        name: modelKey
+        type: string
       responses:
-        200:
+        204:
           description: OK
 
   /models/{modelKey}/data:
     get:
+      tags:
+      - model
       summary: Get data of DM Model
       parameters:
       - in: path
@@ -383,6 +406,8 @@ paths:
           schema:
             $ref: '#/definitions/ModelData'
     put:
+      tags:
+      - model
       summary: Get data of DM Model
       parameters:
       - in: path
@@ -393,13 +418,15 @@ paths:
         schema:
           $ref: '#/definitions/ModelData'
       responses:
-        200:
+        201:
           description: OK
           schema:
             $ref: '#/definitions/ModelData'
 
   /models/{modelKey}/build:
     get:
+      tags:
+      - model
       parameters:
       - in: path
         name: modelKey
@@ -412,6 +439,8 @@ paths:
 
   /models/{modelKey}/updates:
     get:
+      tags:
+      - model
       description: Return the build of the trainer's build.
       parameters:
       - in: path
@@ -425,6 +454,8 @@ paths:
             items:
               $ref: '#/definitions/TrainerBuildMetadata'
     post:
+      tags:
+      - model
       description: update the model as an updatable model
       parameters:
       - in: path
@@ -444,6 +475,8 @@ paths:
 
   /models/{modelKey}/updates/{updateKey}:
     get:
+      tags:
+      - model
       description: Return the build of the trainer's build.
       parameters:
       - in: path
@@ -460,10 +493,8 @@ paths:
 
   /trainers:
     get:
-      operationId: searchTrainer
-      produces:
-        - application/json
-        - application/xml
+      tags:
+      - trainer
       parameters:
       - name: tags
         in: query
@@ -526,7 +557,7 @@ paths:
         schema:
           $ref: "#/definitions/TrainerMetadata"
       responses:
-        200:
+        201:
           description: OK
           schema:
             $ref: '#/definitions/TrainerMetadata'
@@ -559,7 +590,7 @@ paths:
         schema:
           $ref: "#/definitions/TrainerMetadata"
       responses:
-       200:
+        200:
           description: OK
           schema:
             $ref: '#/definitions/TrainerMetadata'
@@ -571,20 +602,19 @@ paths:
         name: trainerKey
         type: string
       responses:
-        200:
+        204:
           description: OK
 
   /trainers/{trainerKey}/processers:
     get:
       tags:
       - trainer
-      - processer
       parameters:
       - in: path
         name: trainerKey
         type: string
       responses:
-        "200":
+        200:
           description: OK
           schema:
             type: array
@@ -593,7 +623,6 @@ paths:
     put:
       tags:
       - trainer
-      - processer
       parameters:
       - in: path
         name: trainerKey
@@ -616,20 +645,18 @@ paths:
     get:
       tags:
       - trainer
-      - input
       parameters:
       - in: path
         name: trainerKey
         type: string
       responses:
-        "200":
+        200:
           description: OK
           schema:
             $ref: '#/definitions/DMInput'
     put:
       tags:
       - trainer
-      - input
       parameters:
       - in: path
         name: trainerKey
@@ -648,13 +675,12 @@ paths:
     get:
       tags:
       - trainer
-      - build
       parameters:
       - in: path
         name: trainerKey
         type: string
       responses:
-        "200":
+        200:
           description: OK
           schema:
             $ref: '#/definitions/TrainerFlow'
@@ -662,6 +688,8 @@ paths:
   #Archives services.
   /archives/svcs:
     get:
+      tags:
+      - archive
       responses:
         200:
           description: OK
@@ -670,39 +698,47 @@ paths:
             items:
               $ref: '#/definitions/ServiceArchiveMetadata'
     post:
+      tags:
+      - archive
       parameters:
         - in: body
           name: body
           schema:
             $ref: '#/definitions/ServiceArchive'
       responses:
-        200:
+        201:
           description: OK
           schema:
             $ref: '#/definitions/ServiceArchiveMetadata'
 
   /archives/svcs/{archiveKey}:
     get:
+      tags:
+      - archive
       parameters:
-        - in: path
-          name: archiveKey
-          type: string
+      - in: path
+        name: archiveKey
+        type: string
       responses:
         200:
           description: OK
           schema:
             $ref: '#/definitions/ServiceArchive'
     delete:
+      tags:
+      - archive
       parameters:
-        - in: path
-          name: archiveKey
-          type: string
+      - in: path
+        name: archiveKey
+        type: string
       responses:
-        200:
+        204:
           description: OK
 
   /archives/model:
     get:
+      tags:
+      - archive
       responses:
         200:
           description: OK
@@ -711,39 +747,47 @@ paths:
             items:
               $ref: '#/definitions/ModelArchiveMetadata'
     post:
+      tags:
+      - archive
       parameters:
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/ModelArchive'
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/ModelArchive'
       responses:
-        200:
+        201:
           description: OK
           schema:
             $ref: '#/definitions/ModelArchiveMetadata'
 
   /archives/model/{archiveKey}:
     get:
+      tags:
+      - archive
       parameters:
-        - in: path
-          name: archiveKey
-          type: string
+      - in: path
+        name: archiveKey
+        type: string
       responses:
         200:
           description: OK
           schema:
             $ref: '#/definitions/ModelArchive'
     delete:
+      tags:
+      - archive
       parameters:
         - in: path
           name: archiveKey
           type: string
       responses:
-        200:
+        204:
           description: OK
 
   /archives/trainer:
     get:
+      tags:
+      - archive
       responses:
         200:
           description: OK
@@ -752,19 +796,23 @@ paths:
             items:
               $ref: '#/definitions/TrainerArchiveMetadata'
     post:
+      tags:
+      - archive
       parameters:
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/TrainerArchive'
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/TrainerArchive'
       responses:
-        200:
+        201:
           description: OK
           schema:
             $ref: '#/definitions/TrainerArchiveMetadata'
 
   /archives/trainer/{archiveKey}:
     get:
+      tags:
+      - archive
       parameters:
         - in: path
           name: archiveKey
@@ -775,12 +823,14 @@ paths:
           schema:
             $ref: '#/definitions/TrainerArchive'
     delete:
+      tags:
+      - archive
       parameters:
         - in: path
           name: archiveKey
           type: string
       responses:
-        200:
+        204:
           description: OK
 
 definitions:
@@ -905,7 +955,7 @@ definitions:
 
   ServiceArchiveMetadata:
     required:
-      - key
+    - key
     properties:
       key:
         type: string
@@ -940,7 +990,7 @@ definitions:
 
   ModelMetadata:
     required:
-      - key
+    - key
     properties:
       key:
         type: string

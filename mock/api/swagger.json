@@ -9,990 +9,14 @@
   "host": "localhost:8080",
   "basePath": "/repo",
   "paths": {
-  
-  "/svcs/{svcKey}/build": {
-    "get": {
-      "x-swagger-router-controller": "Svc",
-      "tags": ["Svc"],
-      "operationId": "svcsSvcKeyBuildGet",
-      "parameters": [
-        
-        {
-  "name" : "svcKey",
-  "in" : "path",
-  "required" : true,
-  "type" : "string"
-}
-        
-      ],
-      "responses": {
-        
-        "200": {
-  "description" : "OK",
-  "schema" : {
-    "$ref" : "#/definitions/ServiceFlow"
-  }
-}
-        
-        
-      }
-    }
-  } 
-  
-   ,
-  
-  "/svcs/{svcKey}/input": {
-    "put": {
-      "x-swagger-router-controller": "Input",
-      "tags": ["Input"],
-      "operationId": "svcsSvcKeyInputPut",
-      "parameters": [
-        
-        {
-  "name" : "svcKey",
-  "in" : "path",
-  "required" : true,
-  "type" : "string"
-},
-        
-        {
-  "in" : "body",
-  "name" : "body",
-  "required" : false,
-  "schema" : {
-    "$ref" : "#/definitions/DMInput"
-  }
-}
-        
-      ],
-      "responses": {
-        
-        "200": {
-  "description" : "OK",
-  "schema" : {
-    "$ref" : "#/definitions/DMInput"
-  }
-}
-        
-        
-      }
-    }
-  } ,
-  
-  "/trainers/{trainerKey}/input": {
-    "get": {
-      "x-swagger-router-controller": "Input",
-      "tags": ["Input"],
-      "operationId": "trainersTrainerKeyInputGet",
-      "parameters": [
-        
-        {
-  "name" : "trainerKey",
-  "in" : "path",
-  "required" : true,
-  "type" : "string"
-}
-        
-      ],
-      "responses": {
-        
-        "200": {
-  "description" : "OK",
-  "schema" : {
-    "$ref" : "#/definitions/DMInput"
-  }
-}
-        
-        
-      }
-    }
-  } ,
-  
-  "/trainers/{trainerKey}/input": {
-    "put": {
-      "x-swagger-router-controller": "Input",
-      "tags": ["Input"],
-      "operationId": "trainersTrainerKeyInputPut",
-      "parameters": [
-        
-        {
-  "name" : "trainerKey",
-  "in" : "path",
-  "required" : true,
-  "type" : "string"
-},
-        
-        {
-  "in" : "body",
-  "name" : "body",
-  "required" : false,
-  "schema" : {
-    "$ref" : "#/definitions/DMInput"
-  }
-}
-        
-      ],
-      "responses": {
-        
-        "200": {
-  "description" : "OK",
-  "schema" : {
-    "$ref" : "#/definitions/DMInput"
-  }
-}
-        
-        
-      }
-    }
-  } 
-  
-   ,
-  
-  "/svcs": {
-    "get": {
-      "x-swagger-router-controller": "Svcs",
-      "tags": ["Svcs"],
-      "operationId": "searchDMSvc",
-      "responses": {
-        
-        "200": {
-  "description" : "DMService Metadata List",
-  "schema" : {
-    "type" : "array",
-    "items" : {
-      "$ref" : "#/definitions/DMSvcMetadata"
-    }
-  }
-}
-        ,
-        
-        "default": {
-  "description" : "unexpected error",
-  "schema" : {
-    "$ref" : "#/definitions/errorModel"
-  }
-}
-        
-        
-      }
-    }
-  } ,
-  
-  "/svcs/{svcKey}": {
-    "get": {
-      "x-swagger-router-controller": "Svcs",
-      "tags": ["Svcs"],
-      "operationId": "svcsSvcKeyGet",
-      "parameters": [
-        
-        {
-  "name" : "svcKey",
-  "in" : "path",
-  "description" : "The generated key of a DMService",
-  "required" : true,
-  "type" : "string"
-}
-        
-      ],
-      "responses": {
-        
-        "200": {
-  "description" : "OK",
-  "schema" : {
-    "$ref" : "#/definitions/DMSvcMetadata"
-  }
-}
-        
-        
-      }
-    }
-  } ,
-  
-  "/svcs/{svcKey}": {
-    "put": {
-      "x-swagger-router-controller": "Svcs",
-      "tags": ["Svcs"],
-      "operationId": "svcsSvcKeyPut",
-      "parameters": [
-        
-        {
-  "name" : "svcKey",
-  "in" : "path",
-  "description" : "The generated key of a DMService",
-  "required" : true,
-  "type" : "string"
-},
-        
-        {
-  "in" : "body",
-  "name" : "body",
-  "description" : "The new DMService",
-  "required" : false,
-  "schema" : {
-    "$ref" : "#/definitions/DMSvcMetadata"
-  }
-}
-        
-      ],
-      "responses": {
-        
-        "200": {
-  "description" : "OK",
-  "schema" : {
-    "$ref" : "#/definitions/DMSvcMetadata"
-  }
-}
-        
-        
-      }
-    }
-  } ,
-  
-  "/svcs/{svcKey}": {
-    "delete": {
-      "x-swagger-router-controller": "Svcs",
-      "tags": ["Svcs"],
-      "operationId": "svcsSvcKeyDelete",
-      "parameters": [
-        
-        {
-  "name" : "svcKey",
-  "in" : "path",
-  "required" : true,
-  "type" : "string"
-}
-        
-      ],
-      "responses": {
-        
-        "200": {
-  "description" : "OK"
-}
-        
-        
-      }
-    }
-  } ,
-  
-  "/svcs/{svcKey}/input": {
-    "get": {
-      "x-swagger-router-controller": "Svcs",
-      "tags": ["Svcs"],
-      "operationId": "svcsSvcKeyInputGet",
-      "parameters": [
-        
-        {
-  "name" : "svcKey",
-  "in" : "path",
-  "required" : true,
-  "type" : "string"
-}
-        
-      ],
-      "responses": {
-        
-        "200": {
-  "description" : "OK",
-  "schema" : {
-    "$ref" : "#/definitions/DMInput"
-  }
-}
-        
-        
-      }
-    }
-  } ,
-  
-  "/svcs/{svcKey}/input": {
-    "put": {
-      "x-swagger-router-controller": "Svcs",
-      "tags": ["Svcs"],
-      "operationId": "svcsSvcKeyInputPut",
-      "parameters": [
-        
-        {
-  "name" : "svcKey",
-  "in" : "path",
-  "required" : true,
-  "type" : "string"
-},
-        
-        {
-  "in" : "body",
-  "name" : "body",
-  "required" : false,
-  "schema" : {
-    "$ref" : "#/definitions/DMInput"
-  }
-}
-        
-      ],
-      "responses": {
-        
-        "200": {
-  "description" : "OK",
-  "schema" : {
-    "$ref" : "#/definitions/DMInput"
-  }
-}
-        
-        
-      }
-    }
-  } ,
-  
-  "/svcs/{svcKey}/output": {
-    "get": {
-      "x-swagger-router-controller": "Svcs",
-      "tags": ["Svcs"],
-      "operationId": "svcsSvcKeyOutputGet",
-      "parameters": [
-        
-        {
-  "name" : "svcKey",
-  "in" : "path",
-  "required" : true,
-  "type" : "string"
-}
-        
-      ],
-      "responses": {
-        
-        "200": {
-  "description" : "OK",
-  "schema" : {
-    "$ref" : "#/definitions/DMOutput"
-  }
-}
-        
-        
-      }
-    }
-  } ,
-  
-  "/svcs/{svcKey}/output": {
-    "put": {
-      "x-swagger-router-controller": "Svcs",
-      "tags": ["Svcs"],
-      "operationId": "svcsSvcKeyOutputPut",
-      "parameters": [
-        
-        {
-  "name" : "svcKey",
-  "in" : "path",
-  "required" : true,
-  "type" : "string"
-},
-        
-        {
-  "in" : "body",
-  "name" : "body",
-  "required" : false,
-  "schema" : {
-    "$ref" : "#/definitions/DMOutput"
-  }
-}
-        
-      ],
-      "responses": {
-        
-        "200": {
-  "description" : "OK",
-  "schema" : {
-    "$ref" : "#/definitions/DMOutput"
-  }
-}
-        
-        
-      }
-    }
-  } ,
-  
-  "/svcs/{svcKey}/processers": {
-    "get": {
-      "x-swagger-router-controller": "Svcs",
-      "tags": ["Svcs"],
-      "operationId": "svcsSvcKeyProcessersGet",
-      "parameters": [
-        
-        {
-  "name" : "svcKey",
-  "in" : "path",
-  "required" : true,
-  "type" : "string"
-}
-        
-      ],
-      "responses": {
-        
-        "200": {
-  "description" : "OK",
-  "schema" : {
-    "type" : "array",
-    "items" : {
-      "$ref" : "#/definitions/Processer"
-    }
-  }
-}
-        
-        
-      }
-    }
-  } ,
-  
-  "/svcs/{svcKey}/processers": {
-    "put": {
-      "x-swagger-router-controller": "Svcs",
-      "tags": ["Svcs"],
-      "operationId": "svcsSvcKeyProcessersPut",
-      "parameters": [
-        
-        {
-  "name" : "svcKey",
-  "in" : "path",
-  "description" : "The generated key of a DMService",
-  "required" : true,
-  "type" : "string"
-},
-        
-        {
-  "in" : "body",
-  "name" : "body",
-  "required" : false,
-  "schema" : {
-    "type" : "array",
-    "items" : {
-      "$ref" : "#/definitions/Processer"
-    }
-  }
-}
-        
-      ],
-      "responses": {
-        
-        "200": {
-  "description" : "OK",
-  "schema" : {
-    "type" : "array",
-    "items" : {
-      "$ref" : "#/definitions/Processer"
-    }
-  }
-}
-        
-        
-      }
-    }
-  } 
-  
-   ,
-  
-  "/svcs/{svcKey}/build": {
-    "get": {
-      "x-swagger-router-controller": "Build",
-      "tags": ["Build"],
-      "operationId": "svcsSvcKeyBuildGet",
-      "parameters": [
-        
-        {
-  "name" : "svcKey",
-  "in" : "path",
-  "required" : true,
-  "type" : "string"
-}
-        
-      ],
-      "responses": {
-        
-        "200": {
-  "description" : "OK",
-  "schema" : {
-    "$ref" : "#/definitions/ServiceFlow"
-  }
-}
-        
-        
-      }
-    }
-  } ,
-  
-  "/trainers/{trainerKey}/build": {
-    "get": {
-      "x-swagger-router-controller": "Build",
-      "tags": ["Build"],
-      "operationId": "trainersTrainerKeyBuildGet",
-      "parameters": [
-        
-        {
-  "name" : "trainerKey",
-  "in" : "path",
-  "required" : true,
-  "type" : "string"
-}
-        
-      ],
-      "responses": {
-        
-        "200": {
-  "description" : "OK",
-  "schema" : {
-    "$ref" : "#/definitions/TrainerFlow"
-  }
-}
-        
-        
-      }
-    }
-  } 
-  
-   ,
-  
-  "/svcs/{svcKey}/output": {
-    "get": {
-      "x-swagger-router-controller": "Output",
-      "tags": ["Output"],
-      "operationId": "svcsSvcKeyOutputGet",
-      "parameters": [
-        
-        {
-  "name" : "svcKey",
-  "in" : "path",
-  "required" : true,
-  "type" : "string"
-}
-        
-      ],
-      "responses": {
-        
-        "200": {
-  "description" : "OK",
-  "schema" : {
-    "$ref" : "#/definitions/DMOutput"
-  }
-}
-        
-        
-      }
-    }
-  } ,
-  
-  "/svcs/{svcKey}/output": {
-    "put": {
-      "x-swagger-router-controller": "Output",
-      "tags": ["Output"],
-      "operationId": "svcsSvcKeyOutputPut",
-      "parameters": [
-        
-        {
-  "name" : "svcKey",
-  "in" : "path",
-  "required" : true,
-  "type" : "string"
-},
-        
-        {
-  "in" : "body",
-  "name" : "body",
-  "required" : false,
-  "schema" : {
-    "$ref" : "#/definitions/DMOutput"
-  }
-}
-        
-      ],
-      "responses": {
-        
-        "200": {
-  "description" : "OK",
-  "schema" : {
-    "$ref" : "#/definitions/DMOutput"
-  }
-}
-        
-        
-      }
-    }
-  } 
-  
-   ,
-  
-  "/models/{modelKey}": {
-    "get": {
-      "x-swagger-router-controller": "Model",
-      "tags": ["Model"],
-      "operationId": "modelsModelKeyGet",
-      "parameters": [
-        
-        {
-  "name" : "modelKey",
-  "in" : "path",
-  "description" : "The generated key of a Processer model",
-  "required" : true,
-  "type" : "string"
-}
-        
-      ],
-      "responses": {
-        
-        "200": {
-  "description" : "OK",
-  "schema" : {
-    "$ref" : "#/definitions/ModelMetadata"
-  }
-}
-        
-        
-      }
-    }
-  } ,
-  
-  "/models/{modelKey}": {
-    "put": {
-      "x-swagger-router-controller": "Model",
-      "tags": ["Model"],
-      "operationId": "modelsModelKeyPut",
-      "parameters": [
-        
-        {
-  "name" : "modelKey",
-  "in" : "path",
-  "description" : "The generated key of a Processer model",
-  "required" : true,
-  "type" : "string"
-},
-        
-        {
-  "in" : "body",
-  "name" : "body",
-  "required" : false,
-  "schema" : {
-    "$ref" : "#/definitions/ModelMetadata"
-  }
-}
-        
-      ],
-      "responses": {
-        
-        "200": {
-  "description" : "OK",
-  "schema" : {
-    "$ref" : "#/definitions/ModelMetadata"
-  }
-}
-        
-        
-      }
-    }
-  } 
-  
-   ,
-  
-  "/trainers": {
-    "post": {
-      "x-swagger-router-controller": "Trainer",
-      "tags": ["Trainer"],
-      "operationId": "trainersPost",
-      "parameters": [
-        
-        {
-  "in" : "body",
-  "name" : "body",
-  "required" : false,
-  "schema" : {
-    "$ref" : "#/definitions/TrainerMetadata"
-  }
-}
-        
-      ],
-      "responses": {
-        
-        "200": {
-  "description" : "OK",
-  "schema" : {
-    "$ref" : "#/definitions/TrainerMetadata"
-  }
-}
-        
-        
-      }
-    }
-  } ,
-  
-  "/trainers/{trainerKey}": {
-    "get": {
-      "x-swagger-router-controller": "Trainer",
-      "tags": ["Trainer"],
-      "operationId": "trainersTrainerKeyGet",
-      "parameters": [
-        
-        {
-  "name" : "trainerKey",
-  "in" : "path",
-  "required" : true,
-  "type" : "string"
-}
-        
-      ],
-      "responses": {
-        
-        "200": {
-  "description" : "OK",
-  "schema" : {
-    "$ref" : "#/definitions/TrainerMetadata"
-  }
-}
-        
-        
-      }
-    }
-  } ,
-  
-  "/trainers/{trainerKey}": {
-    "put": {
-      "x-swagger-router-controller": "Trainer",
-      "tags": ["Trainer"],
-      "operationId": "trainersTrainerKeyPut",
-      "parameters": [
-        
-        {
-  "name" : "trainerKey",
-  "in" : "path",
-  "required" : true,
-  "type" : "string"
-},
-        
-        {
-  "in" : "body",
-  "name" : "body",
-  "description" : "The new DMService",
-  "required" : false,
-  "schema" : {
-    "$ref" : "#/definitions/TrainerMetadata"
-  }
-}
-        
-      ],
-      "responses": {
-        
-        "200": {
-  "description" : "OK",
-  "schema" : {
-    "$ref" : "#/definitions/TrainerMetadata"
-  }
-}
-        
-        
-      }
-    }
-  } ,
-  
-  "/trainers/{trainerKey}": {
-    "delete": {
-      "x-swagger-router-controller": "Trainer",
-      "tags": ["Trainer"],
-      "operationId": "trainersTrainerKeyDelete",
-      "parameters": [
-        
-        {
-  "name" : "trainerKey",
-  "in" : "path",
-  "required" : true,
-  "type" : "string"
-}
-        
-      ],
-      "responses": {
-        
-        "200": {
-  "description" : "OK"
-}
-        
-        
-      }
-    }
-  } ,
-  
-  "/trainers/{trainerKey}/build": {
-    "get": {
-      "x-swagger-router-controller": "Trainer",
-      "tags": ["Trainer"],
-      "operationId": "trainersTrainerKeyBuildGet",
-      "parameters": [
-        
-        {
-  "name" : "trainerKey",
-  "in" : "path",
-  "required" : true,
-  "type" : "string"
-}
-        
-      ],
-      "responses": {
-        
-        "200": {
-  "description" : "OK",
-  "schema" : {
-    "$ref" : "#/definitions/TrainerFlow"
-  }
-}
-        
-        
-      }
-    }
-  } ,
-  
-  "/trainers/{trainerKey}/input": {
-    "get": {
-      "x-swagger-router-controller": "Trainer",
-      "tags": ["Trainer"],
-      "operationId": "trainersTrainerKeyInputGet",
-      "parameters": [
-        
-        {
-  "name" : "trainerKey",
-  "in" : "path",
-  "required" : true,
-  "type" : "string"
-}
-        
-      ],
-      "responses": {
-        
-        "200": {
-  "description" : "OK",
-  "schema" : {
-    "$ref" : "#/definitions/DMInput"
-  }
-}
-        
-        
-      }
-    }
-  } ,
-  
-  "/trainers/{trainerKey}/input": {
-    "put": {
-      "x-swagger-router-controller": "Trainer",
-      "tags": ["Trainer"],
-      "operationId": "trainersTrainerKeyInputPut",
-      "parameters": [
-        
-        {
-  "name" : "trainerKey",
-  "in" : "path",
-  "required" : true,
-  "type" : "string"
-},
-        
-        {
-  "in" : "body",
-  "name" : "body",
-  "required" : false,
-  "schema" : {
-    "$ref" : "#/definitions/DMInput"
-  }
-}
-        
-      ],
-      "responses": {
-        
-        "200": {
-  "description" : "OK",
-  "schema" : {
-    "$ref" : "#/definitions/DMInput"
-  }
-}
-        
-        
-      }
-    }
-  } ,
-  
-  "/trainers/{trainerKey}/processers": {
-    "get": {
-      "x-swagger-router-controller": "Trainer",
-      "tags": ["Trainer"],
-      "operationId": "trainersTrainerKeyProcessersGet",
-      "parameters": [
-        
-        {
-  "name" : "trainerKey",
-  "in" : "path",
-  "required" : true,
-  "type" : "string"
-}
-        
-      ],
-      "responses": {
-        
-        "200": {
-  "description" : "OK",
-  "schema" : {
-    "type" : "array",
-    "items" : {
-      "$ref" : "#/definitions/Processer"
-    }
-  }
-}
-        
-        
-      }
-    }
-  } ,
-  
-  "/trainers/{trainerKey}/processers": {
-    "put": {
-      "x-swagger-router-controller": "Trainer",
-      "tags": ["Trainer"],
-      "operationId": "trainersTrainerKeyProcessersPut",
-      "parameters": [
-        
-        {
-  "name" : "trainerKey",
-  "in" : "path",
-  "required" : true,
-  "type" : "string"
-},
-        
-        {
-  "in" : "body",
-  "name" : "body",
-  "required" : false,
-  "schema" : {
-    "type" : "array",
-    "items" : {
-      "$ref" : "#/definitions/Processer"
-    }
-  }
-}
-        
-      ],
-      "responses": {
-        
-        "200": {
-  "description" : "OK",
-  "schema" : {
-    "type" : "array",
-    "items" : {
-      "$ref" : "#/definitions/Processer"
-    }
-  }
-}
-        
-        
-      }
-    }
-  } 
-  
-   ,
-  
+
   "/archives/model": {
     "get": {
-      "x-swagger-router-controller": "Default",
-      "tags": ["Default"],
+      "x-swagger-router-controller": "Archive",
+      "tags": ["Archive"],
       "operationId": "archivesModelGet",
       "responses": {
-        
+
         "200": {
   "description" : "OK",
   "schema" : {
@@ -1002,19 +26,17 @@
     }
   }
 }
-        
-        
+
+
       }
-    }
   } ,
-  
-  "/archives/model": {
+
     "post": {
-      "x-swagger-router-controller": "Default",
-      "tags": ["Default"],
+      "x-swagger-router-controller": "Archive",
+      "tags": ["Archive"],
       "operationId": "archivesModelPost",
       "parameters": [
-        
+
         {
   "in" : "body",
   "name" : "body",
@@ -1023,84 +45,82 @@
     "$ref" : "#/definitions/ModelArchive"
   }
 }
-        
+
       ],
       "responses": {
-        
-        "200": {
+
+        "201": {
   "description" : "OK",
   "schema" : {
     "$ref" : "#/definitions/ModelArchiveMetadata"
   }
 }
-        
-        
+
+
       }
     }
   } ,
-  
+
   "/archives/model/{archiveKey}": {
     "get": {
-      "x-swagger-router-controller": "Default",
-      "tags": ["Default"],
+      "x-swagger-router-controller": "Archive",
+      "tags": ["Archive"],
       "operationId": "archivesModelArchiveKeyGet",
       "parameters": [
-        
+
         {
   "name" : "archiveKey",
   "in" : "path",
   "required" : true,
   "type" : "string"
 }
-        
+
       ],
       "responses": {
-        
+
         "200": {
   "description" : "OK",
   "schema" : {
     "$ref" : "#/definitions/ModelArchive"
   }
 }
-        
-        
+
+
       }
-    }
   } ,
-  
-  "/archives/model/{archiveKey}": {
+
     "delete": {
-      "x-swagger-router-controller": "Default",
-      "tags": ["Default"],
+      "x-swagger-router-controller": "Archive",
+      "tags": ["Archive"],
       "operationId": "archivesModelArchiveKeyDelete",
       "parameters": [
-        
+
         {
   "name" : "archiveKey",
   "in" : "path",
   "required" : true,
   "type" : "string"
 }
-        
+
       ],
       "responses": {
-        
-        "200": {
+
+        "204": {
   "description" : "OK"
 }
-        
-        
+
+
       }
     }
   } ,
-  
+
   "/archives/svcs": {
     "get": {
-      "x-swagger-router-controller": "Default",
-      "tags": ["Default"],
+      "x-swagger-router-controller": "Archive",
+      "tags": ["Archive"],
       "operationId": "archivesSvcsGet",
       "responses": {
-        
+
         "200": {
   "description" : "OK",
   "schema" : {
@@ -1110,19 +130,17 @@
     }
   }
 }
-        
-        
+
+
       }
-    }
   } ,
-  
-  "/archives/svcs": {
+
     "post": {
-      "x-swagger-router-controller": "Default",
-      "tags": ["Default"],
+      "x-swagger-router-controller": "Archive",
+      "tags": ["Archive"],
       "operationId": "archivesSvcsPost",
       "parameters": [
-        
+
         {
   "in" : "body",
   "name" : "body",
@@ -1131,84 +149,82 @@
     "$ref" : "#/definitions/ServiceArchive"
   }
 }
-        
+
       ],
       "responses": {
-        
-        "200": {
+
+        "201": {
   "description" : "OK",
   "schema" : {
     "$ref" : "#/definitions/ServiceArchiveMetadata"
   }
 }
-        
-        
+
+
       }
     }
   } ,
-  
+
   "/archives/svcs/{archiveKey}": {
     "get": {
-      "x-swagger-router-controller": "Default",
-      "tags": ["Default"],
+      "x-swagger-router-controller": "Archive",
+      "tags": ["Archive"],
       "operationId": "archivesSvcsArchiveKeyGet",
       "parameters": [
-        
+
         {
   "name" : "archiveKey",
   "in" : "path",
   "required" : true,
   "type" : "string"
 }
-        
+
       ],
       "responses": {
-        
+
         "200": {
   "description" : "OK",
   "schema" : {
     "$ref" : "#/definitions/ServiceArchive"
   }
 }
-        
-        
+
+
       }
-    }
   } ,
-  
-  "/archives/svcs/{archiveKey}": {
+
     "delete": {
-      "x-swagger-router-controller": "Default",
-      "tags": ["Default"],
+      "x-swagger-router-controller": "Archive",
+      "tags": ["Archive"],
       "operationId": "archivesSvcsArchiveKeyDelete",
       "parameters": [
-        
+
         {
   "name" : "archiveKey",
   "in" : "path",
   "required" : true,
   "type" : "string"
 }
-        
+
       ],
       "responses": {
-        
-        "200": {
+
+        "204": {
   "description" : "OK"
 }
-        
-        
+
+
       }
     }
   } ,
-  
+
   "/archives/trainer": {
     "get": {
-      "x-swagger-router-controller": "Default",
-      "tags": ["Default"],
+      "x-swagger-router-controller": "Archive",
+      "tags": ["Archive"],
       "operationId": "archivesTrainerGet",
       "responses": {
-        
+
         "200": {
   "description" : "OK",
   "schema" : {
@@ -1218,19 +234,17 @@
     }
   }
 }
-        
-        
+
+
       }
-    }
   } ,
-  
-  "/archives/trainer": {
+
     "post": {
-      "x-swagger-router-controller": "Default",
-      "tags": ["Default"],
+      "x-swagger-router-controller": "Archive",
+      "tags": ["Archive"],
       "operationId": "archivesTrainerPost",
       "parameters": [
-        
+
         {
   "in" : "body",
   "name" : "body",
@@ -1239,84 +253,84 @@
     "$ref" : "#/definitions/TrainerArchive"
   }
 }
-        
+
       ],
       "responses": {
-        
-        "200": {
+
+        "201": {
   "description" : "OK",
   "schema" : {
     "$ref" : "#/definitions/TrainerArchiveMetadata"
   }
 }
-        
-        
+
+
       }
     }
   } ,
-  
+
   "/archives/trainer/{archiveKey}": {
     "get": {
-      "x-swagger-router-controller": "Default",
-      "tags": ["Default"],
+      "x-swagger-router-controller": "Archive",
+      "tags": ["Archive"],
       "operationId": "archivesTrainerArchiveKeyGet",
       "parameters": [
-        
+
         {
   "name" : "archiveKey",
   "in" : "path",
   "required" : true,
   "type" : "string"
 }
-        
+
       ],
       "responses": {
-        
+
         "200": {
   "description" : "OK",
   "schema" : {
     "$ref" : "#/definitions/TrainerArchive"
   }
 }
-        
-        
+
+
       }
-    }
   } ,
-  
-  "/archives/trainer/{archiveKey}": {
+
     "delete": {
-      "x-swagger-router-controller": "Default",
-      "tags": ["Default"],
+      "x-swagger-router-controller": "Archive",
+      "tags": ["Archive"],
       "operationId": "archivesTrainerArchiveKeyDelete",
       "parameters": [
-        
+
         {
   "name" : "archiveKey",
   "in" : "path",
   "required" : true,
   "type" : "string"
 }
-        
+
       ],
       "responses": {
-        
-        "200": {
+
+        "204": {
   "description" : "OK"
 }
-        
-        
+
+
       }
     }
-  } ,
-  
-  "/models": {
+  }
+
+   ,
+
+  "/svcs": {
     "get": {
-      "x-swagger-router-controller": "Default",
-      "tags": ["Default"],
-      "operationId": "searchModel",
+      "x-swagger-router-controller": "Svcs",
+      "tags": ["Svcs"],
+      "operationId": "svcsGet",
       "parameters": [
-        
+
         {
   "name" : "tags",
   "in" : "query",
@@ -1328,56 +342,39 @@
   },
   "collectionFormat" : "csv"
 },
-        
+
         {
   "name" : "name",
   "in" : "query",
-  "description" : "Model's name to filter by",
+  "description" : "DMService's type to filter by",
   "required" : false,
   "type" : "string"
 },
-        
+
         {
   "name" : "type",
   "in" : "query",
-  "description" : "Model's type to filter by",
+  "description" : "DMService's type to filter by",
   "required" : false,
   "type" : "string"
 },
-        
+
         {
   "name" : "domain",
   "in" : "query",
-  "description" : "Model's domain to filter by",
+  "description" : "DMService's domain to filter by",
   "required" : false,
   "type" : "string"
 },
-        
+
         {
   "name" : "locale",
   "in" : "query",
-  "description" : "Model's locale to filter by",
+  "description" : "DMService's locale to filter by",
   "required" : false,
   "type" : "string"
 },
-        
-        {
-  "name" : "trainerType",
-  "in" : "query",
-  "description" : "Model's trainer type to filter by",
-  "required" : false,
-  "type" : "string"
-},
-        
-        {
-  "name" : "referenceCountLowLimit",
-  "in" : "query",
-  "description" : "The minium reference count to filter by",
-  "required" : false,
-  "type" : "integer",
-  "format" : "int32"
-},
-        
+
         {
   "name" : "limit",
   "in" : "query",
@@ -1386,7 +383,7 @@
   "type" : "integer",
   "format" : "int32"
 },
-        
+
         {
   "name" : "start",
   "in" : "query",
@@ -1395,7 +392,7 @@
   "type" : "integer",
   "format" : "int32"
 },
-        
+
         {
   "name" : "orderby",
   "in" : "query",
@@ -1403,12 +400,489 @@
   "required" : false,
   "type" : "string"
 }
-        
+
       ],
       "responses": {
-        
+
         "200": {
-  "description" : "Model List",
+  "description" : "DMService Metadata List",
+  "schema" : {
+    "type" : "array",
+    "items" : {
+      "$ref" : "#/definitions/DMSvcMetadata"
+    }
+  }
+}
+
+
+      }
+  } ,
+
+    "post": {
+      "x-swagger-router-controller": "Svcs",
+      "tags": ["Svcs"],
+      "operationId": "svcsPost",
+      "parameters": [
+
+        {
+  "in" : "body",
+  "name" : "body",
+  "required" : false,
+  "schema" : {
+    "$ref" : "#/definitions/DMSvcMetadata"
+  }
+}
+
+      ],
+      "responses": {
+
+        "200": {
+  "description" : "OK",
+  "schema" : {
+    "$ref" : "#/definitions/DMSvcMetadata"
+  }
+}
+        ,
+
+        "default": {
+  "description" : "unexpected error",
+  "schema" : {
+    "$ref" : "#/definitions/errorModel"
+  }
+}
+
+
+      }
+    }
+  } ,
+
+  "/svcs/{svcKey}": {
+    "get": {
+      "x-swagger-router-controller": "Svcs",
+      "tags": ["Svcs"],
+      "operationId": "svcsSvcKeyGet",
+      "parameters": [
+
+        {
+  "name" : "svcKey",
+  "in" : "path",
+  "description" : "The generated key of a DMService",
+  "required" : true,
+  "type" : "string"
+}
+
+      ],
+      "responses": {
+
+        "200": {
+  "description" : "OK",
+  "schema" : {
+    "$ref" : "#/definitions/DMSvcMetadata"
+  }
+}
+
+
+      }
+  } ,
+
+    "put": {
+      "x-swagger-router-controller": "Svcs",
+      "tags": ["Svcs"],
+      "operationId": "svcsSvcKeyPut",
+      "parameters": [
+
+        {
+  "name" : "svcKey",
+  "in" : "path",
+  "description" : "The generated key of a DMService",
+  "required" : true,
+  "type" : "string"
+},
+
+        {
+  "in" : "body",
+  "name" : "body",
+  "description" : "The new DMService",
+  "required" : false,
+  "schema" : {
+    "$ref" : "#/definitions/DMSvcMetadata"
+  }
+}
+
+      ],
+      "responses": {
+
+        "200": {
+  "description" : "OK",
+  "schema" : {
+    "$ref" : "#/definitions/DMSvcMetadata"
+  }
+}
+
+
+      }
+  } ,
+
+    "delete": {
+      "x-swagger-router-controller": "Svcs",
+      "tags": ["Svcs"],
+      "operationId": "svcsSvcKeyDelete",
+      "parameters": [
+
+        {
+  "name" : "svcKey",
+  "in" : "path",
+  "required" : true,
+  "type" : "string"
+}
+
+      ],
+      "responses": {
+
+        "200": {
+  "description" : "OK"
+}
+
+
+      }
+    }
+  } ,
+
+  "/svcs/{svcKey}/build": {
+    "get": {
+      "x-swagger-router-controller": "Svcs",
+      "tags": ["Svcs"],
+      "operationId": "svcsSvcKeyBuildGet",
+      "parameters": [
+
+        {
+  "name" : "svcKey",
+  "in" : "path",
+  "required" : true,
+  "type" : "string"
+}
+
+      ],
+      "responses": {
+
+        "200": {
+  "description" : "OK",
+  "schema" : {
+    "$ref" : "#/definitions/ServiceFlow"
+  }
+}
+
+
+      }
+    }
+  } ,
+
+  "/svcs/{svcKey}/input": {
+    "get": {
+      "x-swagger-router-controller": "Svcs",
+      "tags": ["Svcs"],
+      "operationId": "svcsSvcKeyInputGet",
+      "parameters": [
+
+        {
+  "name" : "svcKey",
+  "in" : "path",
+  "required" : true,
+  "type" : "string"
+}
+
+      ],
+      "responses": {
+
+        "200": {
+  "description" : "OK",
+  "schema" : {
+    "$ref" : "#/definitions/DMInput"
+  }
+}
+
+
+      }
+  } ,
+
+    "put": {
+      "x-swagger-router-controller": "Svcs",
+      "tags": ["Svcs"],
+      "operationId": "svcsSvcKeyInputPut",
+      "parameters": [
+
+        {
+  "name" : "svcKey",
+  "in" : "path",
+  "required" : true,
+  "type" : "string"
+},
+
+        {
+  "in" : "body",
+  "name" : "body",
+  "required" : false,
+  "schema" : {
+    "$ref" : "#/definitions/DMInput"
+  }
+}
+
+      ],
+      "responses": {
+
+        "200": {
+  "description" : "OK",
+  "schema" : {
+    "$ref" : "#/definitions/DMInput"
+  }
+}
+
+
+      }
+    }
+  } ,
+
+  "/svcs/{svcKey}/output": {
+    "get": {
+      "x-swagger-router-controller": "Svcs",
+      "tags": ["Svcs"],
+      "operationId": "svcsSvcKeyOutputGet",
+      "parameters": [
+
+        {
+  "name" : "svcKey",
+  "in" : "path",
+  "required" : true,
+  "type" : "string"
+}
+
+      ],
+      "responses": {
+
+        "200": {
+  "description" : "OK",
+  "schema" : {
+    "$ref" : "#/definitions/DMOutput"
+  }
+}
+
+
+      }
+  } ,
+
+    "put": {
+      "x-swagger-router-controller": "Svcs",
+      "tags": ["Svcs"],
+      "operationId": "svcsSvcKeyOutputPut",
+      "parameters": [
+
+        {
+  "name" : "svcKey",
+  "in" : "path",
+  "required" : true,
+  "type" : "string"
+},
+
+        {
+  "in" : "body",
+  "name" : "body",
+  "required" : false,
+  "schema" : {
+    "$ref" : "#/definitions/DMOutput"
+  }
+}
+
+      ],
+      "responses": {
+
+        "200": {
+  "description" : "OK",
+  "schema" : {
+    "$ref" : "#/definitions/DMOutput"
+  }
+}
+
+
+      }
+    }
+  } ,
+
+  "/svcs/{svcKey}/processers": {
+    "get": {
+      "x-swagger-router-controller": "Svcs",
+      "tags": ["Svcs"],
+      "operationId": "svcsSvcKeyProcessersGet",
+      "parameters": [
+
+        {
+  "name" : "svcKey",
+  "in" : "path",
+  "required" : true,
+  "type" : "string"
+}
+
+      ],
+      "responses": {
+
+        "200": {
+  "description" : "OK",
+  "schema" : {
+    "type" : "array",
+    "items" : {
+      "$ref" : "#/definitions/Processer"
+    }
+  }
+}
+
+
+      }
+  } ,
+
+    "put": {
+      "x-swagger-router-controller": "Svcs",
+      "tags": ["Svcs"],
+      "operationId": "svcsSvcKeyProcessersPut",
+      "parameters": [
+
+        {
+  "name" : "svcKey",
+  "in" : "path",
+  "description" : "The generated key of a DMService",
+  "required" : true,
+  "type" : "string"
+},
+
+        {
+  "in" : "body",
+  "name" : "body",
+  "required" : false,
+  "schema" : {
+    "type" : "array",
+    "items" : {
+      "$ref" : "#/definitions/Processer"
+    }
+  }
+}
+
+      ],
+      "responses": {
+
+        "200": {
+  "description" : "OK",
+  "schema" : {
+    "type" : "array",
+    "items" : {
+      "$ref" : "#/definitions/Processer"
+    }
+  }
+}
+
+
+      }
+    }
+  }
+
+   ,
+
+  "/models": {
+    "get": {
+      "x-swagger-router-controller": "Model",
+      "tags": ["Model"],
+      "operationId": "modelsGet",
+      "parameters": [
+
+        {
+  "name" : "tags",
+  "in" : "query",
+  "description" : "tags to filter by",
+  "required" : false,
+  "type" : "array",
+  "items" : {
+    "type" : "string"
+  },
+  "collectionFormat" : "csv"
+},
+
+        {
+  "name" : "name",
+  "in" : "query",
+  "description" : "Model's name to filter by",
+  "required" : false,
+  "type" : "string"
+},
+
+        {
+  "name" : "type",
+  "in" : "query",
+  "description" : "Model's type to filter by",
+  "required" : false,
+  "type" : "string"
+},
+
+        {
+  "name" : "domain",
+  "in" : "query",
+  "description" : "Model's domain to filter by",
+  "required" : false,
+  "type" : "string"
+},
+
+        {
+  "name" : "locale",
+  "in" : "query",
+  "description" : "Model's locale to filter by",
+  "required" : false,
+  "type" : "string"
+},
+
+        {
+  "name" : "trainerType",
+  "in" : "query",
+  "description" : "Model's trainer type to filter by",
+  "required" : false,
+  "type" : "string"
+},
+
+        {
+  "name" : "referenceCountLowLimit",
+  "in" : "query",
+  "description" : "The minium reference count to filter by",
+  "required" : false,
+  "type" : "integer",
+  "format" : "int32"
+},
+
+        {
+  "name" : "limit",
+  "in" : "query",
+  "description" : "maximum number of results to return",
+  "required" : false,
+  "type" : "integer",
+  "format" : "int32"
+},
+
+        {
+  "name" : "start",
+  "in" : "query",
+  "description" : "start index of response entities list",
+  "required" : false,
+  "type" : "integer",
+  "format" : "int32"
+},
+
+        {
+  "name" : "orderby",
+  "in" : "query",
+  "description" : "the order factor of the list.",
+  "required" : false,
+  "type" : "string"
+}
+
+      ],
+      "responses": {
+
+        "200": {
+  "description" : "OK",
   "schema" : {
     "type" : "array",
     "items" : {
@@ -1417,26 +891,24 @@
   }
 }
         ,
-        
+
         "default": {
   "description" : "unexpected error",
   "schema" : {
     "$ref" : "#/definitions/errorModel"
   }
 }
-        
-        
+
+
       }
-    }
   } ,
-  
-  "/models": {
+
     "post": {
-      "x-swagger-router-controller": "Default",
-      "tags": ["Default"],
-      "operationId": "addSvc",
+      "x-swagger-router-controller": "Model",
+      "tags": ["Model"],
+      "operationId": "modelsPost",
       "parameters": [
-        
+
         {
   "in" : "body",
   "name" : "body",
@@ -1445,128 +917,191 @@
     "$ref" : "#/definitions/ModelBuildRequest"
   }
 }
-        
+
       ],
       "responses": {
-        
-        "200": {
+
+        "201": {
   "description" : "OK",
   "schema" : {
     "$ref" : "#/definitions/ModelMetadata"
   }
 }
         ,
-        
+
         "default": {
   "description" : "unexpected error",
   "schema" : {
     "$ref" : "#/definitions/errorModel"
   }
 }
-        
-        
+
+
       }
     }
   } ,
-  
+
   "/models/{modelKey}": {
+    "get": {
+      "x-swagger-router-controller": "Model",
+      "tags": ["Model"],
+      "operationId": "modelsModelKeyGet",
+      "parameters": [
+
+        {
+  "name" : "modelKey",
+  "in" : "path",
+  "description" : "The generated key of a Processer model",
+  "required" : true,
+  "type" : "string"
+}
+
+      ],
+      "responses": {
+
+        "200": {
+  "description" : "OK",
+  "schema" : {
+    "$ref" : "#/definitions/ModelMetadata"
+  }
+}
+
+
+      }
+  } ,
+
+    "put": {
+      "x-swagger-router-controller": "Model",
+      "tags": ["Model"],
+      "operationId": "modelsModelKeyPut",
+      "parameters": [
+
+        {
+  "name" : "modelKey",
+  "in" : "path",
+  "description" : "The generated key of a Processer model",
+  "required" : true,
+  "type" : "string"
+},
+
+        {
+  "in" : "body",
+  "name" : "body",
+  "required" : false,
+  "schema" : {
+    "$ref" : "#/definitions/ModelMetadata"
+  }
+}
+
+      ],
+      "responses": {
+
+        "201": {
+  "description" : "OK",
+  "schema" : {
+    "$ref" : "#/definitions/ModelMetadata"
+  }
+}
+
+
+      }
+  } ,
+
     "delete": {
-      "x-swagger-router-controller": "Default",
-      "tags": ["Default"],
+      "x-swagger-router-controller": "Model",
+      "tags": ["Model"],
       "operationId": "modelsModelKeyDelete",
       "parameters": [
-        
+
         {
   "name" : "modelKey",
   "in" : "path",
   "required" : true,
   "type" : "string"
 }
-        
+
       ],
       "responses": {
-        
-        "200": {
+
+        "204": {
   "description" : "OK"
 }
-        
-        
+
+
       }
     }
   } ,
-  
+
   "/models/{modelKey}/build": {
     "get": {
-      "x-swagger-router-controller": "Default",
-      "tags": ["Default"],
+      "x-swagger-router-controller": "Model",
+      "tags": ["Model"],
       "operationId": "modelsModelKeyBuildGet",
       "parameters": [
-        
+
         {
   "name" : "modelKey",
   "in" : "path",
   "required" : true,
   "type" : "string"
 }
-        
+
       ],
       "responses": {
-        
+
         "200": {
   "description" : "OK",
   "schema" : {
     "$ref" : "#/definitions/ModelBuildRequest"
   }
 }
-        
-        
+
+
       }
     }
   } ,
-  
+
   "/models/{modelKey}/data": {
     "get": {
-      "x-swagger-router-controller": "Default",
-      "tags": ["Default"],
+      "x-swagger-router-controller": "Model",
+      "tags": ["Model"],
       "operationId": "modelsModelKeyDataGet",
       "parameters": [
-        
+
         {
   "name" : "modelKey",
   "in" : "path",
   "required" : true,
   "type" : "string"
 }
-        
+
       ],
       "responses": {
-        
+
         "200": {
   "description" : "OK",
   "schema" : {
     "$ref" : "#/definitions/ModelData"
   }
 }
-        
-        
+
+
       }
-    }
   } ,
-  
-  "/models/{modelKey}/data": {
+
     "put": {
-      "x-swagger-router-controller": "Default",
-      "tags": ["Default"],
+      "x-swagger-router-controller": "Model",
+      "tags": ["Model"],
       "operationId": "modelsModelKeyDataPut",
       "parameters": [
-        
+
         {
   "name" : "modelKey",
   "in" : "path",
   "required" : true,
   "type" : "string"
 },
-        
+
         {
   "in" : "body",
   "name" : "body",
@@ -1575,39 +1110,39 @@
     "$ref" : "#/definitions/ModelData"
   }
 }
-        
+
       ],
       "responses": {
-        
-        "200": {
+
+        "201": {
   "description" : "OK",
   "schema" : {
     "$ref" : "#/definitions/ModelData"
   }
 }
-        
-        
+
+
       }
     }
   } ,
-  
+
   "/models/{modelKey}/updates": {
     "get": {
-      "x-swagger-router-controller": "Default",
-      "tags": ["Default"],
+      "x-swagger-router-controller": "Model",
+      "tags": ["Model"],
       "operationId": "modelsModelKeyUpdatesGet",
       "parameters": [
-        
+
         {
   "name" : "modelKey",
   "in" : "path",
   "required" : true,
   "type" : "string"
 }
-        
+
       ],
       "responses": {
-        
+
         "200": {
   "description" : "OK",
   "schema" : {
@@ -1617,19 +1152,17 @@
     }
   }
 }
-        
-        
+
+
       }
-    }
   } ,
-  
-  "/models/{modelKey}/updates": {
+
     "post": {
-      "x-swagger-router-controller": "Default",
-      "tags": ["Default"],
+      "x-swagger-router-controller": "Model",
+      "tags": ["Model"],
       "operationId": "modelsModelKeyUpdatesPost",
       "parameters": [
-        
+
         {
   "name" : "modelKey",
   "in" : "path",
@@ -1637,7 +1170,7 @@
   "required" : true,
   "type" : "string"
 },
-        
+
         {
   "in" : "body",
   "name" : "body",
@@ -1647,105 +1180,67 @@
     "$ref" : "#/definitions/ModelBuildRequest"
   }
 }
-        
+
       ],
       "responses": {
-        
+
         "200": {
   "description" : "OK",
   "schema" : {
     "$ref" : "#/definitions/TrainerBuildMetadata"
   }
 }
-        
-        
+
+
       }
     }
   } ,
-  
+
   "/models/{modelKey}/updates/{updateKey}": {
     "get": {
-      "x-swagger-router-controller": "Default",
-      "tags": ["Default"],
+      "x-swagger-router-controller": "Model",
+      "tags": ["Model"],
       "operationId": "modelsModelKeyUpdatesUpdateKeyGet",
       "parameters": [
-        
+
         {
   "name" : "modelKey",
   "in" : "path",
   "required" : true,
   "type" : "string"
 },
-        
+
         {
   "name" : "updateKey",
   "in" : "path",
   "required" : true,
   "type" : "string"
 }
-        
+
       ],
       "responses": {
-        
+
         "200": {
   "description" : "OK",
   "schema" : {
     "$ref" : "#/definitions/TrainerBuildMetadata"
   }
 }
-        
-        
+
+
       }
     }
-  } ,
-  
-  "/svcs": {
-    "post": {
-      "x-swagger-router-controller": "Default",
-      "tags": ["Default"],
-      "operationId": "addSvc",
-      "parameters": [
-        
-        {
-  "in" : "body",
-  "name" : "body",
-  "description" : "",
-  "required" : false,
-  "schema" : {
-    "$ref" : "#/definitions/DMSvcMetadata"
   }
-}
-        
-      ],
-      "responses": {
-        
-        "200": {
-  "description" : "Created DM Service",
-  "schema" : {
-    "$ref" : "#/definitions/DMSvcMetadata"
-  }
-}
-        ,
-        
-        "default": {
-  "description" : "unexpected error",
-  "schema" : {
-    "$ref" : "#/definitions/errorModel"
-  }
-}
-        
-        
-      }
-    }
-  } ,
-  
+
+   ,
+
   "/trainers": {
     "get": {
-      "x-swagger-router-controller": "Default",
-      "tags": ["Default"],
-      "operationId": "searchTrainer",
+      "x-swagger-router-controller": "Trainer",
+      "tags": ["Trainer"],
+      "operationId": "trainersGet",
       "parameters": [
-        
+
         {
   "name" : "tags",
   "in" : "query",
@@ -1757,7 +1252,7 @@
   },
   "collectionFormat" : "csv"
 },
-        
+
         {
   "name" : "name",
   "in" : "query",
@@ -1765,7 +1260,7 @@
   "required" : false,
   "type" : "string"
 },
-        
+
         {
   "name" : "type",
   "in" : "query",
@@ -1773,7 +1268,7 @@
   "required" : false,
   "type" : "string"
 },
-        
+
         {
   "name" : "domain",
   "in" : "query",
@@ -1781,7 +1276,7 @@
   "required" : false,
   "type" : "string"
 },
-        
+
         {
   "name" : "locale",
   "in" : "query",
@@ -1789,7 +1284,7 @@
   "required" : false,
   "type" : "string"
 },
-        
+
         {
   "name" : "limit",
   "in" : "query",
@@ -1798,7 +1293,7 @@
   "type" : "integer",
   "format" : "int32"
 },
-        
+
         {
   "name" : "start",
   "in" : "query",
@@ -1807,7 +1302,7 @@
   "type" : "integer",
   "format" : "int32"
 },
-        
+
         {
   "name" : "orderby",
   "in" : "query",
@@ -1815,10 +1310,10 @@
   "required" : false,
   "type" : "string"
 }
-        
+
       ],
       "responses": {
-        
+
         "200": {
   "description" : "OK",
   "schema" : {
@@ -1828,31 +1323,242 @@
     }
   }
 }
-        
-        
+
+
+      }
+  } ,
+
+    "post": {
+      "x-swagger-router-controller": "Trainer",
+      "tags": ["Trainer"],
+      "operationId": "trainersPost",
+      "parameters": [
+
+        {
+  "in" : "body",
+  "name" : "body",
+  "required" : false,
+  "schema" : {
+    "$ref" : "#/definitions/TrainerMetadata"
+  }
+}
+
+      ],
+      "responses": {
+
+        "201": {
+  "description" : "OK",
+  "schema" : {
+    "$ref" : "#/definitions/TrainerMetadata"
+  }
+}
+
+
       }
     }
-  } 
-  
-   ,
-  
-  "/trainers/{trainerKey}/processers": {
+  } ,
+
+  "/trainers/{trainerKey}": {
     "get": {
-      "x-swagger-router-controller": "Processer",
-      "tags": ["Processer"],
-      "operationId": "trainersTrainerKeyProcessersGet",
+      "x-swagger-router-controller": "Trainer",
+      "tags": ["Trainer"],
+      "operationId": "trainersTrainerKeyGet",
       "parameters": [
-        
+
         {
   "name" : "trainerKey",
   "in" : "path",
   "required" : true,
   "type" : "string"
 }
-        
+
       ],
       "responses": {
-        
+
+        "200": {
+  "description" : "OK",
+  "schema" : {
+    "$ref" : "#/definitions/TrainerMetadata"
+  }
+}
+
+
+      }
+  } ,
+
+    "put": {
+      "x-swagger-router-controller": "Trainer",
+      "tags": ["Trainer"],
+      "operationId": "trainersTrainerKeyPut",
+      "parameters": [
+
+        {
+  "name" : "trainerKey",
+  "in" : "path",
+  "required" : true,
+  "type" : "string"
+},
+
+        {
+  "in" : "body",
+  "name" : "body",
+  "description" : "The new DMService",
+  "required" : false,
+  "schema" : {
+    "$ref" : "#/definitions/TrainerMetadata"
+  }
+}
+
+      ],
+      "responses": {
+
+        "200": {
+  "description" : "OK",
+  "schema" : {
+    "$ref" : "#/definitions/TrainerMetadata"
+  }
+}
+
+
+      }
+  } ,
+
+    "delete": {
+      "x-swagger-router-controller": "Trainer",
+      "tags": ["Trainer"],
+      "operationId": "trainersTrainerKeyDelete",
+      "parameters": [
+
+        {
+  "name" : "trainerKey",
+  "in" : "path",
+  "required" : true,
+  "type" : "string"
+}
+
+      ],
+      "responses": {
+
+        "204": {
+  "description" : "OK"
+}
+
+
+      }
+    }
+  } ,
+
+  "/trainers/{trainerKey}/build": {
+    "get": {
+      "x-swagger-router-controller": "Trainer",
+      "tags": ["Trainer"],
+      "operationId": "trainersTrainerKeyBuildGet",
+      "parameters": [
+
+        {
+  "name" : "trainerKey",
+  "in" : "path",
+  "required" : true,
+  "type" : "string"
+}
+
+      ],
+      "responses": {
+
+        "200": {
+  "description" : "OK",
+  "schema" : {
+    "$ref" : "#/definitions/TrainerFlow"
+  }
+}
+
+
+      }
+    }
+  } ,
+
+  "/trainers/{trainerKey}/input": {
+    "get": {
+      "x-swagger-router-controller": "Trainer",
+      "tags": ["Trainer"],
+      "operationId": "trainersTrainerKeyInputGet",
+      "parameters": [
+
+        {
+  "name" : "trainerKey",
+  "in" : "path",
+  "required" : true,
+  "type" : "string"
+}
+
+      ],
+      "responses": {
+
+        "200": {
+  "description" : "OK",
+  "schema" : {
+    "$ref" : "#/definitions/DMInput"
+  }
+}
+
+
+      }
+  } ,
+
+    "put": {
+      "x-swagger-router-controller": "Trainer",
+      "tags": ["Trainer"],
+      "operationId": "trainersTrainerKeyInputPut",
+      "parameters": [
+
+        {
+  "name" : "trainerKey",
+  "in" : "path",
+  "required" : true,
+  "type" : "string"
+},
+
+        {
+  "in" : "body",
+  "name" : "body",
+  "required" : false,
+  "schema" : {
+    "$ref" : "#/definitions/DMInput"
+  }
+}
+
+      ],
+      "responses": {
+
+        "200": {
+  "description" : "OK",
+  "schema" : {
+    "$ref" : "#/definitions/DMInput"
+  }
+}
+
+
+      }
+    }
+  } ,
+
+  "/trainers/{trainerKey}/processers": {
+    "get": {
+      "x-swagger-router-controller": "Trainer",
+      "tags": ["Trainer"],
+      "operationId": "trainersTrainerKeyProcessersGet",
+      "parameters": [
+
+        {
+  "name" : "trainerKey",
+  "in" : "path",
+  "required" : true,
+  "type" : "string"
+}
+
+      ],
+      "responses": {
+
         "200": {
   "description" : "OK",
   "schema" : {
@@ -1862,26 +1568,24 @@
     }
   }
 }
-        
-        
+
+
       }
-    }
   } ,
-  
-  "/trainers/{trainerKey}/processers": {
+
     "put": {
-      "x-swagger-router-controller": "Processer",
-      "tags": ["Processer"],
+      "x-swagger-router-controller": "Trainer",
+      "tags": ["Trainer"],
       "operationId": "trainersTrainerKeyProcessersPut",
       "parameters": [
-        
+
         {
   "name" : "trainerKey",
   "in" : "path",
   "required" : true,
   "type" : "string"
 },
-        
+
         {
   "in" : "body",
   "name" : "body",
@@ -1893,10 +1597,10 @@
     }
   }
 }
-        
+
       ],
       "responses": {
-        
+
         "200": {
   "description" : "OK",
   "schema" : {
@@ -1906,13 +1610,13 @@
     }
   }
 }
-        
-        
+
+
       }
     }
-  } 
-  
-   
+  }
+
+
   }, "definitions": {
   "Domain": {
   "properties" : {

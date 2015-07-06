@@ -1,6 +1,6 @@
 'use strict';
 
-exports.searchDMSvc = function() {
+exports.svcsGet = function(tags, name, type, domain, locale, limit, start, orderby) {
 
   var examples = {};
   
@@ -18,6 +18,31 @@ exports.searchDMSvc = function() {
   "key" : "aeiou",
   "tags" : [ "aeiou" ]
 } ];
+  
+
+  
+  if(Object.keys(examples).length > 0)
+    return examples[Object.keys(examples)[0]];
+  
+}
+exports.svcsPost = function(body) {
+
+  var examples = {};
+  
+  examples['application/json'] = {
+  "owner" : "aeiou",
+  "domain" : {
+    "date" : "aeiou",
+    "name" : "aeiou",
+    "parentDomain" : ""
+  },
+  "name" : "aeiou",
+  "description" : "aeiou",
+  "isPublic" : true,
+  "type" : "aeiou",
+  "key" : "aeiou",
+  "tags" : [ "aeiou" ]
+};
   
 
   
@@ -80,6 +105,20 @@ exports.svcsSvcKeyDelete = function(svcKey) {
   var examples = {};
   
 
+  
+}
+exports.svcsSvcKeyBuildGet = function(svcKey) {
+
+  var examples = {};
+  
+  examples['application/json'] = {
+  "key" : "aeiou"
+};
+  
+
+  
+  if(Object.keys(examples).length > 0)
+    return examples[Object.keys(examples)[0]];
   
 }
 exports.svcsSvcKeyInputGet = function(svcKey) {
