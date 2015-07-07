@@ -11,7 +11,7 @@ info:
     url: 'http://opensource.org/licenses/MIT'
 basePath: /repo
 schemes:
-  - https
+  - http
 consumes:
   - application/json
   - application/xml
