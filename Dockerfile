@@ -3,7 +3,7 @@ FROM google/nodejs
 EXPOSE 12616
 
 WORKDIR /etc/services/dmcloud_repo
-ADD mock .
+ADD . .
 RUN ["npm", "install"]
 
-ENTRYPOINT ["node", "index.js"]
+ENTRYPOINT ["npm", "start"]
