@@ -6,6 +6,9 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var svcs = require('./routes/svcs');
+var trainers = require('./routes/trainers');
+var models = require('./routes/models');
+var archives = require('./routes/archives');
 
 var app = express();
 
@@ -19,6 +22,9 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'swagger-ui')));
 
 app.use('/repo/svcs', svcs);
+app.use('/repo/models', models);
+app.use('/repo/trainers', trainers);
+app.use('/archives', archives);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -47,7 +53,7 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error', {
     message: err.message,
-    error: {}
+    error: err
   });
 });
 
