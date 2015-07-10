@@ -45,25 +45,64 @@ router.post('', function(req, res, next) {
 });
 
 /* GET svc metadata */
-router.get('/key', function(req, res, next){
-  console.log(req);
+router.get('/:key', function(req, res, next){
   for (var i = 0; i < svcs.length; i++) {
     var svc = svcs[i];
-    if(svc.key == res.path.key){
+    if(svc.key == req.params.key){
       res.json(svc);
       break;
     }
   }
+  next();
 });
 
-/* GET svc metadata */
+//Update svc metadata
+router.put('/:key', function(req, res, next){
+    var req_svc = req.body;
+    for (var i = 0; i < svcs.length; i++) {
+      var svc = svcs[i];
+      if(svc.key == req.params.key){
+        res.json(svc);
+        break;
+      }
+    }
+    next();
+});
+
+//Update svc metadata
+router.delete('/:key', function(req, res, next){
+    var req_svc = req.body;
+    for (var i = 0; i < svcs.length; i++) {
+      var svc = svcs[i];
+      if(svc.key == req.params.key){
+        svcs.removeAt(i);
+        break;
+      }
+    }
+    next();
+});
+
+/* GET svc processers */
 router.get('/:key/processers', function(req, res, next){
-    var processers = svcProcessers[res.path.key];
+    var processers = svcProcessers[req.params.key];
     if(processers != null){
       res.json(processers);
     }
+});
 
-    res.josn({});
+/* PUT svc metadata */
+router.put('/:key/processers', function(req, res, next){
+    var req_processers = req.body;
+    svcProcessers[req.params.key] = req_processers;
+    res.json(req_processers);
+});
+
+/* POST svc metadata */
+router.post('/:key/build', function(req, res, next){
+    res.json({
+      key: 1,
+      date: new Date()
+    });
 });
 
 module.exports = router;

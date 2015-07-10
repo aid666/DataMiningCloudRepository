@@ -87,7 +87,7 @@ paths:
         schema:
           $ref: "#/definitions/DMSvcMetadata"
       responses:
-        200:
+        201:
           description: OK
           schema:
               $ref: '#/definitions/DMSvcMetadata'
@@ -142,7 +142,7 @@ paths:
         name: svcKey
         type: string
       responses:
-        200:
+        204:
           description: OK
 
   /svcs/{svcKey}/processers:
@@ -183,68 +183,8 @@ paths:
             items:
               $ref: '#/definitions/Processer'
 
-  /svcs/{svcKey}/input:
-    get:
-      tags:
-      - svcs
-      parameters:
-      - in: path
-        name: svcKey
-        type: string
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/DMInput'
-    put:
-      tags:
-      - svcs
-      parameters:
-      - in: path
-        name: svcKey
-        type: string
-      - in: body
-        name: body
-        schema:
-          $ref: "#/definitions/DMInput"
-      responses:
-        200:
-          description: OK
-          schema:
-              $ref: '#/definitions/DMInput'
-
-  /svcs/{svcKey}/output:
-    get:
-      tags:
-      - svcs
-      parameters:
-      - in: path
-        name: svcKey
-        type: string
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/DMOutput'
-    put:
-      tags:
-      - svcs
-      parameters:
-      - in: path
-        name: svcKey
-        type: string
-      - in: body
-        name: body
-        schema:
-          $ref: "#/definitions/DMOutput"
-      responses:
-        200:
-          description: OK
-          schema:
-              $ref: '#/definitions/DMOutput'
-
   /svcs/{svcKey}/build:
-    get:
+    post:
       tags:
       - svcs
       parameters:
@@ -252,7 +192,7 @@ paths:
         name: svcKey
         type: string
       responses:
-        "200":
+        201:
             description: OK
             schema:
               $ref: '#/definitions/ServiceFlow'
@@ -491,200 +431,6 @@ paths:
           schema:
             $ref: '#/definitions/TrainerBuildMetadata'
 
-  /trainers:
-    get:
-      tags:
-      - trainer
-      parameters:
-      - name: tags
-        in: query
-        description: tags to filter by
-        required: false
-        type: array
-        items:
-          type: string
-        collectionFormat: csv
-      - name: name
-        in: query
-        description: "DMService's type to filter by"
-        required: false
-        type: string
-      - name: type
-        in: query
-        description: "DMService's type to filter by"
-        required: false
-        type: string
-      - name: domain
-        in: query
-        description: "DMService's domain to filter by"
-        required: false
-        type: string
-      - name: locale
-        in: query
-        description: "DMService's locale to filter by"
-        required: false
-        type: string
-      - name: limit
-        in: query
-        description: maximum number of results to return
-        required: false
-        type: integer
-        format: int32
-      - name: start
-        in: query
-        description: start index of response entities list
-        required: false
-        type: integer
-        format: int32
-      - name: orderby
-        in: query
-        description: the order factor of the list.
-        required: false
-        type: string
-      responses:
-        200:
-          description: OK
-          schema:
-            type: array
-            items:
-             $ref: '#/definitions/TrainerMetadata'
-    post:
-      tags:
-      - trainer
-      parameters:
-      - in: body
-        name: body
-        schema:
-          $ref: "#/definitions/TrainerMetadata"
-      responses:
-        201:
-          description: OK
-          schema:
-            $ref: '#/definitions/TrainerMetadata'
-
-  /trainers/{trainerKey}:
-    get:
-      tags:
-      - trainer
-      summary: Get metadata of DM Model Trainer
-      description: Return the medata of DM Trainer by the trainer key
-      parameters:
-      - in: path
-        name: trainerKey
-        type: string
-      responses:
-        200:
-          description: OK
-          schema:
-              $ref: '#/definitions/TrainerMetadata'
-    put:
-      tags:
-      - trainer
-      parameters:
-      - in: path
-        name: trainerKey
-        type: string
-      - in: body
-        name: body
-        description: "The new DMService"
-        schema:
-          $ref: "#/definitions/TrainerMetadata"
-      responses:
-        200:
-          description: OK
-          schema:
-            $ref: '#/definitions/TrainerMetadata'
-    delete:
-      tags:
-      - trainer
-      parameters:
-      - in: path
-        name: trainerKey
-        type: string
-      responses:
-        204:
-          description: OK
-
-  /trainers/{trainerKey}/processers:
-    get:
-      tags:
-      - trainer
-      parameters:
-      - in: path
-        name: trainerKey
-        type: string
-      responses:
-        200:
-          description: OK
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/Processer'
-    put:
-      tags:
-      - trainer
-      parameters:
-      - in: path
-        name: trainerKey
-        type: string
-      - in: body
-        name: body
-        schema:
-          type: array
-          items:
-            $ref: '#/definitions/Processer'
-      responses:
-        200:
-          description: OK
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/Processer'
-
-  /trainers/{trainerKey}/input:
-    get:
-      tags:
-      - trainer
-      parameters:
-      - in: path
-        name: trainerKey
-        type: string
-      responses:
-        200:
-          description: OK
-          schema:
-            $ref: '#/definitions/DMInput'
-    put:
-      tags:
-      - trainer
-      parameters:
-      - in: path
-        name: trainerKey
-        type: string
-      - in: body
-        name: body
-        schema:
-          $ref: "#/definitions/DMInput"
-      responses:
-        200:
-          description: OK
-          schema:
-              $ref: '#/definitions/DMInput'
-
-  /trainers/{trainerKey}/build:
-    get:
-      tags:
-      - trainer
-      parameters:
-      - in: path
-        name: trainerKey
-        type: string
-      responses:
-        200:
-          description: OK
-          schema:
-            $ref: '#/definitions/TrainerFlow'
-
   #Archives services.
   /archives/svcs:
     get:
@@ -784,55 +530,6 @@ paths:
         204:
           description: OK
 
-  /archives/trainer:
-    get:
-      tags:
-      - archive
-      responses:
-        200:
-          description: OK
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/TrainerArchiveMetadata'
-    post:
-      tags:
-      - archive
-      parameters:
-      - in: body
-        name: body
-        schema:
-          $ref: '#/definitions/TrainerArchive'
-      responses:
-        201:
-          description: OK
-          schema:
-            $ref: '#/definitions/TrainerArchiveMetadata'
-
-  /archives/trainer/{archiveKey}:
-    get:
-      tags:
-      - archive
-      parameters:
-        - in: path
-          name: archiveKey
-          type: string
-      responses:
-        200:
-          description: OK
-          schema:
-            $ref: '#/definitions/TrainerArchive'
-    delete:
-      tags:
-      - archive
-      parameters:
-        - in: path
-          name: archiveKey
-          type: string
-      responses:
-        204:
-          description: OK
-
 definitions:
   Domain:
     properties:
@@ -879,22 +576,6 @@ definitions:
         type: string
       dataInfor:
         $ref: '#/definitions/DataInfor'
-
-  DMInput:
-    properties:
-      attributes:
-        type: array
-        items:
-          $ref: '#/definitions/Attribute'
-
-  DMOutput:
-    properties:
-      type:
-        type: string
-      attributes:
-        type: array
-        items:
-          $ref: '#/definitions/Attribute'
 
   DMSvcMetadata:
     required:
@@ -1055,77 +736,6 @@ definitions:
       metadata:
         $ref: '#/definitions/ModelArchiveMetadata'
       content:
-        type: string
-
-  TrainerMetadata:
-    required:
-      - key
-    properties:
-      key:
-        type: string
-      name:
-        type: string
-      description:
-        type: string
-      tags:
-        type: array
-        items:
-          type: string
-      catalog:
-        description: The catelog path of the trainer, classifier.decisionTree.id3
-        type: string
-      domain:
-        $ref: '#/definitions/Domain'
-      type:
-        type: string
-      isPublic:
-        type: boolean
-      owner:
-        type: string
-
-  TrainerBuildMetadata:
-    properties:
-      key:
-        type: string
-
-  TrainerArchiveMetadata:
-    required:
-      - key
-    properties:
-      key:
-        type: string
-      name:
-        type: string
-      description:
-        type: string
-      tags:
-        type: array
-        items:
-          type: string
-      catalog:
-        description: The catelog path of the trainer, classifier.decisionTree.id3
-        type: string
-      domain:
-        $ref: '#/definitions/Domain'
-      type:
-        type: string
-      isPublic:
-        type: boolean
-      owner:
-        type: string
-
-  TrainerArchive:
-    properties:
-      metadata:
-        $ref: '#/definitions/TrainerArchiveMetadata'
-      content:
-        type: string
-
-  TrainerFlow:
-    properties:
-      key:
-        type: string
-      status:
         type: string
 
   errorModel:
