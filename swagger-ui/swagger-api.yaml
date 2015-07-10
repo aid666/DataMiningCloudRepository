@@ -364,7 +364,7 @@ paths:
             $ref: '#/definitions/ModelData'
 
   /models/{modelKey}/build:
-    get:
+    post:
       tags:
       - model
       parameters:

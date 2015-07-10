@@ -62,6 +62,8 @@ router.put('/:key', function(req, res, next){
     for (var i = 0; i < svcs.length; i++) {
       var svc = svcs[i];
       if(svc.key == req.params.key){
+        svcs.splice(i, 1);
+        svcs.push(req_svc);
         res.json(svc);
         break;
       }
@@ -75,7 +77,8 @@ router.delete('/:key', function(req, res, next){
     for (var i = 0; i < svcs.length; i++) {
       var svc = svcs[i];
       if(svc.key == req.params.key){
-        svcs.removeAt(i);
+        svcs.splice(i, 1);
+        res.sendStatus(204);
         break;
       }
     }
