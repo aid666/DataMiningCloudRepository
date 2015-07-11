@@ -24,6 +24,19 @@ var modelDatas = {
   }
 }
 
+var modelBuilds = {
+  1: [
+      {
+        key: 2,
+        datas: "demo data 2"
+      },
+      {
+        key: 3,
+        datas: "demo data 3"
+      }
+    ]
+}
+
 /* GET models listing. */
 router.get('', function(req, res, next) {
   res.json(models);
@@ -75,11 +88,11 @@ router.put('/:key', function(req, res, next){
   }
 });
 
-/* GET model data */
-router.get('/:key/data', function(req, res, next){
-  var data = modelDatas[req.params.key];
-  if(data){
-    res.json(data)
+/* GET model builds */
+router.get('/:key/builds', function(req, res, next){
+  var builds = modelBuilds[req.params.key];
+  if(builds){
+    res.json(builds)
   }
   else {
     res.sendStatus(404);
@@ -87,12 +100,49 @@ router.get('/:key/data', function(req, res, next){
 
 });
 
-/* Updaet model data*/
-router.put('/:key/data', function(req, res, next){
-  var data = modelDatas[req.params.key];
-  if(data){
-    modelDatas[req.params.key] = res.body;
-    res.json(res.body)
+/* POST model builds*/
+router.post('/:key/builds', function(req, res, next){
+  var builds = modelBuilds[req.params.key];
+  if(builds){
+    builds.push(req.body);
+    res.json(req.body)
+  }
+  else {
+    res.sendStatus(404);
+  }
+
+});
+
+/* GET model build  */
+router.get('/:key/builds/:buildKey', function(req, res, next){
+  var builds = modelBuilds[req.params.key];
+  if(builds){
+    for (var i = 0; i < builds.length; i++) {
+      var build = builds[i];
+      if(build.key == req.params.buildKey){
+        res.json(build)
+        break;
+      }
+    }
+  }
+  else {
+    res.sendStatus(404);
+  }
+
+});
+
+/* delete model build*/
+router.delete('/:key/builds/:buildKey', function(req, res, next){
+  var builds = modelBuilds[req.params.key];
+  if(builds){
+    for (var i = 0; i < builds.length; i++) {
+      var build = builds[i];
+      if(model.key == req.params.buildKey){
+        builds.splice(i, 1);
+        res.sendStatus(204);
+        break;
+      }
+    }
   }
   else {
     res.sendStatus(404);

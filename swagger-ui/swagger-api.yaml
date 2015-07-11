@@ -363,21 +363,7 @@ paths:
           schema:
             $ref: '#/definitions/ModelData'
 
-  /models/{modelKey}/build:
-    post:
-      tags:
-      - model
-      parameters:
-      - in: path
-        name: modelKey
-        type: string
-      responses:
-        200:
-          description: OK
-          schema:
-            $ref: "#/definitions/ModelBuildRequest"
-
-  /models/{modelKey}/updates:
+  /models/{modelKey}/builds:
     get:
       tags:
       - model
@@ -396,7 +382,7 @@ paths:
     post:
       tags:
       - model
-      description: update the model as an updatable model
+      description: Add a new build to the build history
       parameters:
       - in: path
         name: modelKey
@@ -404,16 +390,16 @@ paths:
         type: string
       - in: body
         name: body
-        description: Training set
+        description: Training set and trainer, maybe the build history the trainer support the updateable trainer.
         schema:
           $ref: '#/definitions/ModelBuildRequest'
       responses:
-        200:
+        201:
           description: OK
           schema:
             $ref: '#/definitions/TrainerBuildMetadata'
 
-  /models/{modelKey}/updates/{updateKey}:
+  /models/{modelKey}/builds/{buildKey}:
     get:
       tags:
       - model
@@ -423,13 +409,26 @@ paths:
         name: modelKey
         type: string
       - in: path
-        name: updateKey
+        name: buildKey
         type: string
       responses:
         200:
           description: OK
           schema:
             $ref: '#/definitions/TrainerBuildMetadata'
+
+    delete:
+      tags:
+      - model
+      description: Delete the build from the build history
+      parameters:
+      - in: path
+        name: modelKey
+        description: "The generated key of a Processer model build"
+        type: string
+      responses:
+        204:
+          description: OK
 
   #Archives services.
   /archives/svcs:
