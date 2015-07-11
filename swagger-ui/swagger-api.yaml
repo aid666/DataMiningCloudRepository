@@ -431,7 +431,7 @@ paths:
           description: OK
 
   #Archives services.
-  /archives/svcs:
+  /archives/svc:
     get:
       tags:
       - archive
@@ -456,7 +456,7 @@ paths:
           schema:
             $ref: '#/definitions/ServiceArchiveMetadata'
 
-  /archives/svcs/{archiveKey}:
+  /archives/svc/{archiveKey}:
     get:
       tags:
       - archive
