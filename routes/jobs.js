@@ -1,14 +1,14 @@
 var express = require('express');
 var router = express.Router();
 
-var svcs = [
+var jobs = [
     {
       key: 1,
       name: "name 1",
-      processer: [
+      processers: [
         {
           key: 1,
-          type: "classifier",
+          algKey: "scheme",
           domain: {
             name: "domain 1"
           },
@@ -17,67 +17,67 @@ var svcs = [
     }
 ]
 
-var svcProcessers = {
+var jobProcessers = {
   1 : [
     {
       key: 1,
-      algrithm: "demoAlg",
+      algrithm: "scheme",
       modelRef: "demoModelRef"
     },
 
   ],
 }
 
-/* GET svcs listing. */
+/* GET jobs listing. */
 router.get('', function(req, res, next) {
-  res.json(svcs);
+  res.json(jobs);
 });
 
-/* POST svcs listing. */
+/* POST jobs listing. */
 router.post('', function(req, res, next) {
-  var req_svc = req.body;
-  var new_svc = {
-    key: new_svc.key + 3, //Should a key generator here
-    name: new_svc.name
+  var req_job = req.body;
+  var new_job = {
+    key: new_job.key + 3, //Should a key generator here
+    name: new_job.name
   }
-  svcs.push(new_svc)
-  res.json(new_svc);
+  jobs.push(new_job)
+  res.json(new_job);
 });
 
-/* GET svc metadata */
+/* GET job metadata */
 router.get('/:key', function(req, res, next){
-  for (var i = 0; i < svcs.length; i++) {
-    var svc = svcs[i];
-    if(svc.key == req.params.key){
-      res.json(svc);
+  for (var i = 0; i < jobs.length; i++) {
+    var job = jobs[i];
+    if(job.key == req.params.key){
+      res.json(job);
       break;
     }
   }
   next();
 });
 
-//Update svc metadata
+//Update job metadata
 router.put('/:key', function(req, res, next){
-    var req_svc = req.body;
-    for (var i = 0; i < svcs.length; i++) {
-      var svc = svcs[i];
-      if(svc.key == req.params.key){
-        svcs.splice(i, 1);
-        svcs.push(req_svc);
-        res.json(svc);
+    var req_job = req.body;
+    for (var i = 0; i < jobs.length; i++) {
+      var job = jobs[i];
+      if(job.key == req.params.key){
+        jobs.splice(i, 1);
+        jobs.push(req_job);
+        res.json(job);
         break;
       }
     }
     next();
 });
 
-//Update svc metadata
+//Update job metadata
 router.delete('/:key', function(req, res, next){
-    var req_svc = req.body;
-    for (var i = 0; i < svcs.length; i++) {
-      var svc = svcs[i];
-      if(svc.key == req.params.key){
-        svcs.splice(i, 1);
+    var req_job = req.body;
+    for (var i = 0; i < jobs.length; i++) {
+      var job = jobs[i];
+      if(job.key == req.params.key){
+        jobs.splice(i, 1);
         res.sendStatus(204);
         break;
       }
@@ -85,22 +85,22 @@ router.delete('/:key', function(req, res, next){
     next();
 });
 
-/* GET svc processers */
+/* GET job processers */
 router.get('/:key/processers', function(req, res, next){
-    var processers = svcProcessers[req.params.key];
+    var processers = jobProcessers[req.params.key];
     if(processers != null){
       res.json(processers);
     }
 });
 
-/* PUT svc metadata */
+/* PUT job metadata */
 router.put('/:key/processers', function(req, res, next){
     var req_processers = req.body;
-    svcProcessers[req.params.key] = req_processers;
+    jobProcessers[req.params.key] = req_processers;
     res.json(req_processers);
 });
 
-/* POST svc metadata */
+/* POST job metadata */
 router.post('/:key/build', function(req, res, next){
     res.json({
       key: 1,

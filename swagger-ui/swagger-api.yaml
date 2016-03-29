@@ -20,10 +20,10 @@ produces:
   - application/xml
 paths:
 
-  /svcs:
+  /jobs:
     get:
       tags:
-      - svcs
+      - jobs
       parameters:
       - name: tags
         in: query
@@ -35,22 +35,22 @@ paths:
         collectionFormat: csv
       - name: name
         in: query
-        description: "DMService's type to filter by"
+        description: "DMJob's type to filter by"
         required: false
         type: string
       - name: type
         in: query
-        description: "DMService's type to filter by"
+        description: "DMJob's type to filter by"
         required: false
         type: string
       - name: domain
         in: query
-        description: "DMService's domain to filter by"
+        description: "DMJob's domain to filter by"
         required: false
         type: string
       - name: locale
         in: query
-        description: "DMService's locale to filter by"
+        description: "DMJob's locale to filter by"
         required: false
         type: string
       - name: limit
@@ -72,86 +72,86 @@ paths:
         type: string
       responses:
         200:
-          description: DMService Metadata List
+          description: DMJob Metadata List
           schema:
             type: array
             items:
-              $ref: '#/definitions/DMSvcMetadata'
+              $ref: '#/definitions/DMJobMetadata'
     post:
       tags:
-      - svcs
-      description: "Create a new DM Service"
+      - jobs
+      description: "Create a new DM Job"
       parameters:
       - in: body
         name: body
         schema:
-          $ref: "#/definitions/DMSvcMetadata"
+          $ref: "#/definitions/DMJobMetadata"
       responses:
         201:
           description: OK
           schema:
-              $ref: '#/definitions/DMSvcMetadata'
+              $ref: '#/definitions/DMJobMetadata'
         default:
           description: unexpected error
           schema:
             $ref: '#/definitions/errorModel'
 
-  /svcs/{svcKey}:
+  /jobs/{jobKey}:
     get:
       tags:
-      - svcs
-      summary: Get metadata of DM Service
-      description: Return the medata of DM Service based on the svcKey
+      - jobs
+      summary: Get metadata of DM Job
+      description: Return the medata of DM Job based on the jobKey
       parameters:
       - in: path
-        name: svcKey
-        description: "The generated key of a DMService"
+        name: jobKey
+        description: "The generated key of a DM Job"
         type: string
       responses:
         200:
           description: OK
           schema:
-              $ref: '#/definitions/DMSvcMetadata'
+              $ref: '#/definitions/DMJobMetadata'
     put:
       tags:
-      - svcs
-      summary: Update metadata of DM Service
-      description: Update the medata of DM Service based on the svcKey
+      - jobs
+      summary: Update metadata of DM job
+      description: Update the medata of DM job based on the jobKey
       parameters:
       - in: path
-        name: svcKey
-        description: "The generated key of a DMService"
+        name: jobKey
+        description: "The generated key of a DMJob"
         type: string
       - in: body
         name: body
-        description: "The new DMService"
+        description: "The new DMJob"
         schema:
-          $ref: "#/definitions/DMSvcMetadata"
+          $ref: "#/definitions/DMJobMetadata"
       responses:
         200:
           description: OK
           schema:
-              $ref: '#/definitions/DMSvcMetadata'
+              $ref: '#/definitions/DMJobMetadata'
     delete:
       tags:
-      - svcs
-      summary: Remove the whole DM Service
+      - jobs
+      summary: Remove the whole DM job
       description: Remove the medata, archive, processers, input and outpu, not including related model.
       parameters:
       - in: path
-        name: svcKey
+        name: jobKey
         type: string
       responses:
         204:
           description: OK
 
-  /svcs/{svcKey}/processers:
+  /jobs/{jobKey}/processers:
     get:
       tags:
-      - svcs
+      - jobs
       parameters:
       - in: path
-        name: svcKey
+        name: jobKey
         type: string
       responses:
         "200":
@@ -162,12 +162,12 @@ paths:
               $ref: '#/definitions/Processer'
     put:
       tags:
-      - svcs
-      description: If this Service has been build already, use that deployed ProcessFlow to handle the data. Otherwise an ad_hoc execute will be run.
+      - jobs
+      description: If this job has been build already, use that deployed ProcessFlow to handle the data. Otherwise an ad_hoc execute will be run.
       parameters:
       - in: path
-        name: svcKey
-        description: "The generated key of a DMService"
+        name: jobKey
+        description: "The generated key of a DMJob"
         type: string
       - in: body
         name: body
@@ -183,13 +183,13 @@ paths:
             items:
               $ref: '#/definitions/Processer'
 
-  /svcs/{svcKey}/build:
+  /jobs/{jobKey}/build:
     post:
       tags:
-      - svcs
+      - jobs
       parameters:
       - in: path
-        name: svcKey
+        name: jobKey
         type: string
       responses:
         201:
@@ -292,7 +292,7 @@ paths:
       tags:
       - model
       summary: Get metadata of DM Service
-      description: Return the medata of model based on the svcKey
+      description: Return the medata of model based on the jobKey
       parameters:
       - in: path
         name: modelKey
@@ -430,8 +430,8 @@ paths:
         204:
           description: OK
 
-  #Archives services.
-  /archives/svc:
+  #Archives jobs.
+  /archives/job:
     get:
       tags:
       - archive
@@ -456,7 +456,7 @@ paths:
           schema:
             $ref: '#/definitions/ServiceArchiveMetadata'
 
-  /archives/svc/{archiveKey}:
+  /archives/job/{archiveKey}:
     get:
       tags:
       - archive
@@ -576,7 +576,7 @@ definitions:
       dataInfor:
         $ref: '#/definitions/DataInfor'
 
-  DMSvcMetadata:
+  DMJobMetadata:
     required:
       - key
     properties:
