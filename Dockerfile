@@ -1,9 +1,9 @@
 FROM google/nodejs
 
-EXPOSE 12616
+EXPOSE 8080
 
-WORKDIR /etc/services/dmcloud_repo
-ADD . .
-RUN ["npm", "install"]
+# Copy application code.
+COPY . /app/
 
-ENTRYPOINT ["npm", "start"]
+# Install dependencies.
+RUN npm --unsafe-perm install
