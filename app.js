@@ -42,7 +42,7 @@ app.use(function(req, res, next) {
 
 app.use('/repo/jobs', jobs);
 app.use('/repo/models', models);
-app.use('/archives', archives);
+app.use('/repo/archives', archives);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
