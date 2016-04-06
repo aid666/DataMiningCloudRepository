@@ -11,29 +11,36 @@ router.get('', function(req, res, next) {
       if(err){
         res.sendStatus(500);
       }else{
-        res.json(docs);
+        res.json({
+          "items": docs
+        });
       }
     })
 });
 
-router.post('', function(req, res, next) {
-  console.log("create data for " + req.uid);
-  var metadata = {
-      "name": "Model",
-      "domain": "Undefined",
-      "locale": "Global"
-  };
-  /*
-  if(req.body != null){
-    var inData = JSON.parse(req.body);
-    if(inData){
-      metadata.name = inData.name;
-      metadata.domain = inData.domain;
-      metadata.locale = inData.locale;
+function formatInput(inputData, inputErrorCallback){
+    var metadata = {
+        "name": "Model",
+        "domain": "Undefined",
+        "locale": "Global"
+    };
+    try{
+      if(inputData && inputData.metadata){
+        metadata.name = inputData.metadata.name;
+        metadata.domain = inputData.metadata.domain;
+        metadata.locale = inputData.metadata.locale;
+      }
+    }catch(exception){
+      console.log(exception);
+        if(typeof inputErrorCallback == 'function'){
+            inputErrorCallback(exception);
+        }
     }
-  }*/
+    return metadata;
+}
 
-  console.log(metadata);
+router.post('', function(req, res, next) {
+  var metadata = formatInput(req.body);
   var key = shortid.generate();
   var touchDate = new Date().toISOString().substring(0, 19);
   var newData = {
@@ -43,7 +50,6 @@ router.post('', function(req, res, next) {
     "modified": touchDate,
     "metadata": metadata
   };
-  console.log("prepare to insert " + newData);
   modelMetaDS.insert(
     newData,
     function(err, newDoc){
@@ -62,20 +68,20 @@ router.post('', function(req, res, next) {
     })
 });
 
-router.all('/:key/*', function(req, res, next) {
+router.all('/:key', function(req, res, next){
   modelMetaDS.find(
-    {
-      _id: req.params.key
-    },
-    function(err, docs){
-      if(docs.length == 0){
-        res.sendStatus(404);
-      }
-      else{
-        req.dataObj = docs.shift();
-        next();
-      }
-    })
+  {
+    _id: req.params.key
+  },
+  function(err, docs){
+    if(docs.length == 0){
+      res.sendStatus(404);
+    }else{
+      var dataObj = docs.shift();
+      req.dataObj = dataObj;
+      next();
+    }
+  });
 });
 
 router.get('/:key', function(req, res, next){
@@ -83,23 +89,32 @@ router.get('/:key', function(req, res, next){
 });
 
 router.put('/:key', function(req, res, next){
-  var newData = JSON.parse(req.body.metadata);
-  modelMetaDS.update(
-    { _id: req.dataObj._id},
-    {
-      $set: {
-        "metadata": newData,
-        "modified": new Date().toISOString().substring(0, 19)
-      }
-    },
-    {},
-    function(err, numReplaced){
-      if(err == null && numReplaced == 1){
-        res.sendStatus(204);
-      }else{
-        res.sendStatus(500);
-      }
-    });
+  var requestError = null;
+  console.log("PUT " + JSON.stringify(req.body));
+  var newData = formatInput(req.body, function(err){
+    requestError = err;
+  });
+  if(requestError){
+    res.sendStatus(400, JSON.stringify(requestError));
+  }else{
+    console.log("Update " + JSON.stringify(newData));
+    modelMetaDS.update(
+      { _id: req.params.key},
+      {
+        $set: {
+          "metadata": newData,
+          "modified": new Date().toISOString().substring(0, 19)
+        }
+      },
+      {},
+      function(err, numReplaced){
+        if(err == null && numReplaced == 1){
+          res.sendStatus(204);
+        }else{
+          res.sendStatus(500);
+        }
+      });
+  }
 });
 
 router.delete('/:key', function(req, res, next){
@@ -123,23 +138,36 @@ router.get('/:key/content', function(req, res, next){
 });
 
 router.put('/:key/content', function(req, res, next){
-  var newData = JSON.parse(req.body.cotent);
-  modelDS.update(
-    { _id: req.dataObj._id},
-    {
-      $set: {
-        "content": newData,
-        "modified": new Date().toISOString().substring(0, 19)
-      }
-    },
-    {},
-    function(err, numReplaced){
-      if(err == null && numReplaced == 1){
-        res.sendStatus(204);
-      }else{
-        res.sendStatus(500);
-      }
-    });
+    var newData = null;
+    console.log(req.body);
+    try{
+        if(req.body && req.body.content){
+            newData = JSON.parse(req.body.content);
+        }
+    }catch(exception){
+        res.sendStatus(400, exception);
+    }
+    console.log(newData);
+    if(newData){
+        modelDS.update(
+          { _id: req.params.key},
+          {
+            $set: {
+              "content": newData,
+              "modified": new Date().toISOString().substring(0, 19)
+            }
+          },
+          {},
+          function(err, numReplaced){
+            if(err == null && numReplaced == 1){
+              res.sendStatus(204);
+            }else{
+              res.sendStatus(500);
+            }
+          });
+    }else{
+      res.sendStatus(400);
+    }
 });
 
 module.exports = router;
