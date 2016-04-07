@@ -25,10 +25,14 @@ function formatInput(inputData, inputErrorCallback){
         "locale": "Global"
     };
     try{
-      if(inputData && inputData.metadata){
-        metadata.name = inputData.metadata.name;
-        metadata.domain = inputData.metadata.domain;
-        metadata.locale = inputData.metadata.locale;
+      if(inputData){
+        var newData = inputData.metadata;
+        if(typeof newData == 'string'){
+          newData = JSON.parse(inputData.metadata);
+        }
+        metadata.name = newData.name;
+        metadata.domain = newData.domain;
+        metadata.locale = newData.locale;
       }
     }catch(exception){
       console.log(exception);
